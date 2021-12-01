@@ -40,7 +40,7 @@ namespace CS426.analysis
             _output.Close();
         }
 
-        public override void InAMainfunction(AMainfunction node)
+        public override void InAMainMainFunction(AMainMainFunction node)
         {
             WriteLine(".method static void main() cil managed");
             WriteLine("{");
@@ -48,7 +48,7 @@ namespace CS426.analysis
             WriteLine("\t.entrypoint\n");
         }
 
-        public override void OutAMainfunction(AMainfunction node)
+        public override void OutAMainMainFunction(AMainMainFunction node)
         {
             WriteLine("\n\tret");
             WriteLine("}");
@@ -75,12 +75,12 @@ namespace CS426.analysis
             WriteLine(")\n");
         }
 
-        public override void OutAIntOperand(AIntOperand node)
+        public override void OutAIntexpOperand(AIntexpOperand node)
         {
             WriteLine("\tldc.i4 " + node.GetInteger().Text);
         }
 
-        public override void OutAStringOperand(AStringOperand node)
+        public override void OutAStringexpOperand(AStringexpOperand node)
         {
             WriteLine("\tldstr " + node.GetString().Text);
         }
@@ -95,17 +95,17 @@ namespace CS426.analysis
             WriteLine("\tstloc " + node.GetId().Text + "\n");
         }
 
-        public override void OutAAddExpression(AAddExpression node)
+        public override void OutAAddexpExpression5(AAddexpExpression5 node)
         {
             WriteLine("\tadd");
         }
 
-        public override void OutAMultiplyExpression2(AMultiplyExpression2 node)
+        public override void OutAMultexpExpression6(AMultexpExpression6 node)
         {
             WriteLine("\tmul");
         }
 
-        public override void OutANegativeExpression3(ANegativeExpression3 node)
+        public override void OutANegateexpExpression7(ANegateexpExpression7 node)
         {
             WriteLine("\tneg");
         }
