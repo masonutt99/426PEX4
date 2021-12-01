@@ -1,0 +1,86 @@
+// This tells SableCC to put all of the code in a package called CS426
+Package CS426;
+
+// Helpers are sets that let you talk about multiple characters in the same way
+Helpers
+	whitespaces = ' ' | 9 | 10 | 13;
+	whole = ['1' .. '9'];
+	natural = ['0' + whole];
+	letter = [['a' .. 'z'] + ['A' .. 'Z']];
+	
+// PEX 1 - Lexer Portion
+Tokens
+	// Operations and EOL
+	assign = ':=';
+	plus = '+';
+	sub = '-';
+	mult = '*';
+	eol = ';';
+
+	left_parenthesis = '(';
+	right_parenthesis = ')';
+	left_curly = '{';
+	right_curly = '}';
+	comma = ',';
+
+	// Main and Subfunction Keywords (Added for Toy Language 3)
+	main_def = 'main';
+	function_def = 'function';
+	
+	keyword_if = 'if';
+
+	// Variable Names
+	id = letter+;
+
+	// Comments
+	comment = '//' ([[0 .. 0xffff] - [10 + 13]])*;
+
+	// Literals
+	integer = '0' | whole natural*;
+
+	// Strings (Added for Toy Language 3)
+	string = '"' letter* '"';
+
+	// Whitespace
+	blank = whitespaces+;
+
+Ignored Tokens
+	blank, comment;
+
+// PEX 2 - Parser Portion
+Productions
+	// Modified for Toy Language 3 to let you define a single subfunction
+	program = subfunction mainfunction;
+
+	// Main Function (Added for Toy Language 3)
+	mainfunction = main_def left_parenthesis statements right_parenthesis;
+
+	// Functions (Added for Toy Language 3)
+	subfunction = {single} function_def id left_parenthesis statements right_parenthesis | {none};
+
+	// Statements
+	statements = {multiple} statement statements | {single} ;
+	statement = {assignment} assign_statement | 
+			    {declaration} declare_statement | 
+				{call} function_call_statement |
+				{condition} if_one_statement;
+	
+	// Assignment Statement
+	assign_statement = id assign expression eol;
+	
+	// Declaration Statement
+	declare_statement = [type]:id [varname]:id eol;
+	
+	// Function Call (with single parameter)
+	function_call_statement = id left_parenthesis parameters right_parenthesis eol;
+	parameters = {single} expression | {none};
+
+	// If One Statement (ADDED FOR PEX 4 -- DEMO ONLY)
+	// This is a fictitious if statement that only does something IF the value inside the parenthesis is equal to one
+	if_one_statement = keyword_if left_parenthesis expression right_parenthesis left_curly statements right_curly;
+
+	// Expressions (add and multiply only)
+	expression = {add} expression plus expression2 | {pass} expression2;
+	expression2 = {multiply} expression2 mult expression3 | {pass} expression3;
+	expression3 = {negative} sub operand | {pass} operand;
+	operand = {int} integer | {string} string | {variable} id;

@@ -1,0 +1,8 @@
+﻿main (
+
+	if (1+2) {
+		printString("hey");
+	}
+
+	printString("quzzup");
+)

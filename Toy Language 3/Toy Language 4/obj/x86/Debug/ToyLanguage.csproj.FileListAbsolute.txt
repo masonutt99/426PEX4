@@ -1,0 +1,18 @@
+C:\Users\Adrian de Freitas\afacademy.af.edu\DFCS - Documents\Courses\CS426\CS426 - 21 Fall\04 - PEX\Toy Language 2\bin\Debug\ConsoleApplication.exe
+C:\Users\Adrian de Freitas\afacademy.af.edu\DFCS - Documents\Courses\CS426\CS426 - 21 Fall\04 - PEX\Toy Language 2\bin\Debug\ConsoleApplication.pdb
+C:\Users\Adrian de Freitas\afacademy.af.edu\DFCS - Documents\Courses\CS426\CS426 - 21 Fall\04 - PEX\Toy Language 2\obj\x86\Debug\ToyLanguage.csprojAssemblyReference.cache
+C:\Users\Adrian de Freitas\afacademy.af.edu\DFCS - Documents\Courses\CS426\CS426 - 21 Fall\04 - PEX\Toy Language 2\obj\x86\Debug\ToyLanguage.csproj.CoreCompileInputs.cache
+C:\Users\Adrian de Freitas\afacademy.af.edu\DFCS - Documents\Courses\CS426\CS426 - 21 Fall\04 - PEX\Toy Language 2\obj\x86\Debug\ConsoleApplication.exe
+C:\Users\Adrian de Freitas\afacademy.af.edu\DFCS - Documents\Courses\CS426\CS426 - 21 Fall\04 - PEX\Toy Language 2\obj\x86\Debug\ConsoleApplication.pdb
+C:\Users\Adrian de Freitas\afacademy.af.edu\DFCS - Documents\Courses\CS426\CS426 - 21 Fall\04 - PEX\Toy Language 3\bin\Debug\ConsoleApplication.exe
+C:\Users\Adrian de Freitas\afacademy.af.edu\DFCS - Documents\Courses\CS426\CS426 - 21 Fall\04 - PEX\Toy Language 3\bin\Debug\ConsoleApplication.pdb
+C:\Users\Adrian de Freitas\afacademy.af.edu\DFCS - Documents\Courses\CS426\CS426 - 21 Fall\04 - PEX\Toy Language 3\obj\x86\Debug\ToyLanguage.csprojAssemblyReference.cache
+C:\Users\Adrian de Freitas\afacademy.af.edu\DFCS - Documents\Courses\CS426\CS426 - 21 Fall\04 - PEX\Toy Language 3\obj\x86\Debug\ToyLanguage.csproj.CoreCompileInputs.cache
+C:\Users\Adrian de Freitas\afacademy.af.edu\DFCS - Documents\Courses\CS426\CS426 - 21 Fall\04 - PEX\Toy Language 3\obj\x86\Debug\ConsoleApplication.exe
+C:\Users\Adrian de Freitas\afacademy.af.edu\DFCS - Documents\Courses\CS426\CS426 - 21 Fall\04 - PEX\Toy Language 3\obj\x86\Debug\ConsoleApplication.pdb
+C:\Users\Adrian de Freitas\Desktop\Code Generator\bin\Debug\ConsoleApplication.exe
+C:\Users\Adrian de Freitas\Desktop\Code Generator\bin\Debug\ConsoleApplication.pdb
+C:\Users\Adrian de Freitas\Desktop\Code Generator\obj\x86\Debug\ToyLanguage.csprojAssemblyReference.cache
+C:\Users\Adrian de Freitas\Desktop\Code Generator\obj\x86\Debug\ToyLanguage.csproj.CoreCompileInputs.cache
+C:\Users\Adrian de Freitas\Desktop\Code Generator\obj\x86\Debug\ConsoleApplication.exe
+C:\Users\Adrian de Freitas\Desktop\Code Generator\obj\x86\Debug\ConsoleApplication.pdb
