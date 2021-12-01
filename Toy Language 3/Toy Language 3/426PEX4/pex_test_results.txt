@@ -1,0 +1,32 @@
+TITLE GOES HERE 
+Running Correct Test Cases 
+ 
+Testing Declaration Statements 
+
+- AProgram
+     `- AMultipleStatements
+        |- ADeclarationStatement
+        |  `- ADeclareStatement
+        |     |- int
+        |     |- x
+        |     `- ;
+        `- AMultipleStatements
+           |- ADeclarationStatement
+           |  `- ADeclareStatement
+           |     |- dog
+           |     |- charlie
+           |     `- ;
+           `- ASingleStatements
+              `- ACallStatement
+                 `- AFunctionCallStatement
+                    |- bob
+                    |- (
+                    |- AParameters
+                    |  `- APassExpression
+                    |     `- APassExpression2
+                    |        `- AIntOperand
+                    |           `- 1
+                    |- )
+                    `- ;
+
+ 
