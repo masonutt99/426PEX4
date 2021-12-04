@@ -80,6 +80,11 @@ namespace CS426.analysis
             WriteLine("\tldc.i4 " + node.GetInt().Text);
         }
 
+        public override void OutAFloatexpOperand(AFloatexpOperand node)
+        {
+            WriteLine("\tldc.r8 " + node.GetFloat().Text);
+        }
+
         public override void OutAStringexpOperand(AStringexpOperand node)
         {
             WriteLine("\tldstr " + node.GetString().Text);

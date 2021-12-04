@@ -4,83 +4,141 @@ Package CS426;
 // Helpers are sets that let you talk about multiple characters in the same way
 Helpers
 	whitespaces = ' ' | 9 | 10 | 13;
-	whole = ['1' .. '9'];
-	natural = ['0' + whole];
-	letter = [['a' .. 'z'] + ['A' .. 'Z']];
-	
+	natural = ['1'..'9'];
+	whole = ['0' + natural];
+	letters = [['a'..'z'] + ['A'..'Z']];
+	unscr = '_';
+	anything = [0 .. 0xffff];
+	alnum = [letters + whole];
+	quotes = '"';
+	backslash = '\';
+	anything_but_quotes_or_backslash = [anything - [quotes + backslash]];
+
 // PEX 1 - Lexer Portion
 Tokens
-	// Operations and EOL
-	assign = ':=';
-	plus = '+';
-	sub = '-';
-	mult = '*';
-	eol = ';';
-
-	left_parenthesis = '(';
-	right_parenthesis = ')';
-	left_curly = '{';
-	right_curly = '}';
-	comma = ',';
-
-	// Main and Subfunction Keywords (Added for Toy Language 3)
-	main_def = 'main';
-	function_def = 'function';
-	
-	keyword_if = 'if';
-
-	// Variable Names
-	id = letter+;
-
-	// Comments
-	comment = '//' ([[0 .. 0xffff] - [10 + 13]])*;
 
 	// Literals
-	integer = '0' | whole natural*;
+	int = '0' | natural whole*;
+	string = '"' (anything_but_quotes_or_backslash* | ('\"')*)* '"';
+	float = ('0' | natural*)'.'whole*('e'?'-'?)natural*;
 
-	// Strings (Added for Toy Language 3)
-	string = '"' letter* '"';
+	// Comments
+	comment_line = '//' ([[0 .. 0xffff] - [10 + 13]])*;
+	comment_multiline = '/*' anything* '*/';
+
+	// Operations and EOL
+	eol = ';';
+	assign = '=';
+	plus = '+';
+	mult = '*';
+	minus = '-';
+	div = '/';
+	left_curly = '{';
+	right_curly = '}';
+	left_parenthesis = '(';
+	right_parenthesis = ')';
+	and = '&&';
+	or = '||';
+	not = '!';
+	equivalent = '==';
+	not_equivalent = '!=';
+	less_than = '<';
+	greater_than = '>';
+
+	// Keywords
+	while = 'while';
+	if = 'if';
+	else = 'else';
+	const = 'const';
+	delimiter = ',';
+	def = 'def';
+	main = 'main';
+
+	// Identifier (This should be the last thing checked)
+	// Fix id so that it can only have one underscore at a time
+	// ID must only contain letters, numbers, and underscores
+	// ID must only contain one underscore in a row
+	// ID must start with a letter or number, and must end with a letter or number
+	id = (alnum)+(unscr?alnum+)*;
 
 	// Whitespace
 	blank = whitespaces+;
 
 Ignored Tokens
-	blank, comment;
+	blank, comment_line, comment_multiline;
+
 
 // PEX 2 - Parser Portion
 Productions
-	// Modified for Toy Language 3 to let you define a single subfunction
-	program = subfunction mainfunction;
 
-	// Main Function (Added for Toy Language 3)
-	mainfunction = main_def left_parenthesis statements right_parenthesis;
-
-	// Functions (Added for Toy Language 3)
-	subfunction = {single} function_def id left_parenthesis statements right_parenthesis | {none};
-
-	// Statements
-	statements = {multiple} statement statements | {single} ;
-	statement = {assignment} assign_statement | 
-			    {declaration} declare_statement | 
-				{call} function_call_statement |
-				{condition} if_one_statement;
+	program = constant_declarations function_declarations main_function;
+	// ====================================================================
+	// PROGRAM = CONSTANT_DECLARATIONS FUNCTION_DECLARATIONS MAIN_FUNCTION;
+	// ====================================================================
 	
-	// Assignment Statement
-	assign_statement = id assign expression eol;
-	
-	// Declaration Statement
+	constant_declarations = {multiple} constant_declaration constant_declarations | {pass} ;
+	constant_declaration = const [type]:id [varname]:id assign expression eol;
+
+	function_declarations = {multiple} function_declarations function_declaration | {pass} ;
+	function_declaration = def id left_parenthesis param_decs right_parenthesis left_curly statements right_curly;
+
+	main_function = {main} main left_curly statements right_curly | {pass} ;
+
+	statements = {multiple} statement statements | {pass} ;
+
+	// ==================================
+	// MAKE SURE YOU ADD STATEMENTS HERE!
+	//===================================
+	statement = {declaration} declare_statement |
+				{assignment} assign_statement |
+				{ifstatement} if_statement |
+				{whilestatement} while_statement | 
+				{function_call_statement} function_call_statement;
+
+	// ===================
+	// TYPES OF STATEMENTS
+	// ===================
 	declare_statement = [type]:id [varname]:id eol;
-	
-	// Function Call (with single parameter)
+	assign_statement = id assign expression eol;
+	if_statement = if left_parenthesis expression right_parenthesis left_curly statements right_curly;
+	while_statement = while left_parenthesis expression right_parenthesis left_curly statements right_curly;
 	function_call_statement = id left_parenthesis parameters right_parenthesis eol;
-	parameters = {single} expression | {none};
 
-	// If One Statement (ADDED FOR PEX 4 -- DEMO ONLY)
-	// This is a fictitious if statement that only does something IF the value inside the parenthesis is equal to one
-	if_one_statement = keyword_if left_parenthesis expression right_parenthesis left_curly statements right_curly;
+	// EXPRESSIONS
+	expression = {orexp} expression or expression2 | {pass} expression2;
+	expression2 = {andexp} expression2 and expression3 | {pass} expression3;
+	expression3 = {equalexp} expression3 equivalent expression4 | {notequalexp} expression3 not_equivalent expression4 | {pass} expression4;
+	expression4 = {lessexp} expression4 less_than expression5 | {greaterexp} expression4 greater_than expression5 | {pass} expression5;
 
-	// Expressions (add and multiply only)
-	expression = {add} expression plus expression2 | {pass} expression2;
-	expression2 = {multiply} expression2 mult expression3 | {pass} expression3;
-	expression3 = {negative} sub operand | {pass} operand;
-	operand = {int} integer | {string} string | {variable} id;
+	expression5 = {addexp} expression5 plus expression6 | {subtractexp} expression5 minus expression6 | {pass} expression6;
+	
+	expression6 = {multexp} expression6 mult expression7 | {divexp} expression6 div expression7 | {pass} expression7;
+	expression7 = {negateexp} minus expression8 | {notexp} not expression8 | {pass} expression8;
+	expression8 = {parenthesesexp} left_parenthesis expression right_parenthesis | {pass} operand;
+	operand = {intexp} int | {floatexp} float | {variable} id | {stringexp} string;
+	
+	// PARAMETER DECLARATIONS
+	param_decs = {none} | {one_or_more} param_dec next_param_dec;
+	next_param_dec = {none} | {next} delimiter param_dec next_param_dec;
+	param_dec = [param_type]:id [param_name]:id ;
+
+	// ACTUALLY PASSED PARAMETERS
+	parameters = {none} | {one_or_more} parameter next_parameter;
+	next_parameter = {none} | {next} delimiter parameter next_parameter;
+	parameter = expression;
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
