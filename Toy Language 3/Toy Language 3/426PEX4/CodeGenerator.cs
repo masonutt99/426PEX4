@@ -9,37 +9,44 @@ namespace CS426.analysis
 {
     class CodeGenerator : DepthFirstAdapter
     {
+        // Set up the output StreamWriter
         private StreamWriter _output;
 
+        // Create the Code Generator
         public CodeGenerator()
         {
             _output = new StreamWriter("program.il");
         }
 
+        // Create a method to write something to the output stream
         private void Write(String textToWrite)
         {
             Console.Write(textToWrite);
             _output.Write(textToWrite);
         }
 
+        // Create the method to write a line to the output stream
         private void WriteLine(String textToWrite)
         {
             Console.WriteLine(textToWrite);
             _output.WriteLine(textToWrite);
         }
 
+        // Do this at the beginning of EVERY program
         public override void InAProgram(AProgram node)
         {
             WriteLine(".assembly extern mscorlib {}");
-            WriteLine(".assembly toyprogram");
+            WriteLine(".assembly myprogram");
             WriteLine("{\n\t.ver 1:0:1:0\n}\n");
         }
 
+        // Do this at the END of every program
         public override void OutAProgram(AProgram node)
         {
             _output.Close();
         }
 
+        // Do this at the beginning of main
         public override void InAMainMainFunction(AMainMainFunction node)
         {
             WriteLine(".method static void main() cil managed");
@@ -48,26 +55,32 @@ namespace CS426.analysis
             WriteLine("\t.entrypoint\n");
         }
 
+        // Do this at the end of main
         public override void OutAMainMainFunction(AMainMainFunction node)
         {
             WriteLine("\n\tret");
             WriteLine("}");
         }
 
+        // Do this for each declare statement
         public override void OutADeclareStatement(ADeclareStatement node)
         {
             WriteLine("\t// Declaring Variable " + node.GetVarname().Text);
 
             Write("\t.locals init (");
 
-            // TODO Declare the Variable Here
+            // Check for int, float, or string!
             if (node.GetType().Text == "int")
             {
                 Write("int32 ");
             }
+            else if (node.GetType().Text == "float")
+            {
+                Write("float32 "); // Changed from float to float32
+            }
             else
             {
-                Write(node.GetType().Text + " ");
+                Write("string "); // We only support int32, float32 and string
             }
 
             Write(node.GetVarname().Text);
@@ -75,6 +88,7 @@ namespace CS426.analysis
             WriteLine(")\n");
         }
 
+        // Do this for each int32 that we create
         public override void OutAIntexpOperand(AIntexpOperand node)
         {
             WriteLine("\tldc.i4 " + node.GetInt().Text);
@@ -97,7 +111,11 @@ namespace CS426.analysis
 
         public override void OutAAssignStatement(AAssignStatement node)
         {
-            WriteLine("\tstloc " + node.GetId().Text + "\n");
+            // TO DO < PUT VALUE ON TOP OF STACK >
+
+            // if 
+
+            WriteLine("\n\tstloc " + node.GetId().Text + "\n");
         }
 
         public override void OutAAddexpExpression5(AAddexpExpression5 node)
