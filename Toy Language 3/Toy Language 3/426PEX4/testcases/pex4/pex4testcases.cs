@@ -8,6 +8,8 @@ class Program {
   public static void Test1() {
     Console.WriteLine("Variable Declaration Test");
 
+    
+
     // Declares a bunch of variables
     int    i  = 1;
     double f1 = 2.3;

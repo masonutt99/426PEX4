@@ -53,7 +53,6 @@
     <Compile Include="parser.cs" />
     <Compile Include="pex_main.cs" />
     <Compile Include="prods.cs" />
-    <Compile Include="SemanticAnalyzer.cs" />
     <Compile Include="testcases\pex4\pex4testcases.cs" />
     <Compile Include="tokens.cs" />
   </ItemGroup>
@@ -64,6 +63,7 @@
     <Content Include="testcases\pex1\test1.txt" />
     <Content Include="testcases\pex2\test1.txt" />
     <Content Include="testcases\pex3\test1.txt" />
+    <Content Include="testcases\pex4\test.txt" />
   </ItemGroup>
   <ItemGroup>
     <None Include="app.config" />
