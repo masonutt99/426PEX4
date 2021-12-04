@@ -30,8 +30,30 @@
 	// Declaring Variable s
 	.locals init (string s)
 
-	ldstr "hello world"
+	ldstr "helloworld"
 	stloc s
+
+	ldstr "i ="
+	ldstr "\n"
+	call void [mscorlib]System.Console::Write(string)
+
+	ldloc i
+	call void [mscorlib]System.Console::Write(int32)
+	call void printInt()
+
+	ldstr "f1 ="
+	ldstr "\n"
+	call void [mscorlib]System.Console::Write(string)
+
+	ldloc f1
+	call void [mscorlib]System.Console::Write(float32)
+
+	ldstr "f2 ="
+	ldstr "\n"
+	call void [mscorlib]System.Console::Write(string)
+
+	ldloc f2
+	call void [mscorlib]System.Console::Write(float32)
 
 
 	ret

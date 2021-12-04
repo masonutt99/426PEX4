@@ -7,5 +7,12 @@
     float f2;
     f2 = 3.4e5;
     string s;
-    s = "hello world";
+    s = "helloworld";
+
+    printLine("i =");
+    printInt(i);
+    printLine("f1 =");
+    printFloat(f1);
+    printLine("f2 =");
+    printFloat(f2);
     }
