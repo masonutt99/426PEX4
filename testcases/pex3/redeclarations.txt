@@ -1,0 +1,12 @@
+﻿const int b = 4;
+
+main{
+
+int a;
+a = 5;
+
+float a;
+
+float b;
+
+}

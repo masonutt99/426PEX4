@@ -1,0 +1,7 @@
+﻿const int a = 5;
+const float b = 1.2;
+const string c = "hello world";
+
+main{
+
+}

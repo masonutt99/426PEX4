@@ -40,7 +40,7 @@ namespace CS426.analysis
             _output.Close();
         }
 
-        public override void InAMainfunction(AMainfunction node)
+        public override void InAMainMainFunction(AMainMainFunction node)
         {
             WriteLine(".method static void main() cil managed");
             WriteLine("{");
@@ -48,7 +48,7 @@ namespace CS426.analysis
             WriteLine("\t.entrypoint\n");
         }
 
-        public override void OutAMainfunction(AMainfunction node)
+        public override void OutAMainMainFunction(AMainMainFunction node)
         {
             WriteLine("\n\tret");
             WriteLine("}");

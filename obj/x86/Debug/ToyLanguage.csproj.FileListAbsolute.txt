@@ -1,0 +1,26 @@
+C:\Users\Adrian de Freitas\afacademy.af.edu\DFCS - Documents\Courses\CS426\CS426 - 21 Fall\04 - PEX\Toy Language 2\bin\Debug\ConsoleApplication.exe
+C:\Users\Adrian de Freitas\afacademy.af.edu\DFCS - Documents\Courses\CS426\CS426 - 21 Fall\04 - PEX\Toy Language 2\bin\Debug\ConsoleApplication.pdb
+C:\Users\Adrian de Freitas\afacademy.af.edu\DFCS - Documents\Courses\CS426\CS426 - 21 Fall\04 - PEX\Toy Language 2\obj\x86\Debug\ToyLanguage.csprojAssemblyReference.cache
+C:\Users\Adrian de Freitas\afacademy.af.edu\DFCS - Documents\Courses\CS426\CS426 - 21 Fall\04 - PEX\Toy Language 2\obj\x86\Debug\ToyLanguage.csproj.CoreCompileInputs.cache
+C:\Users\Adrian de Freitas\afacademy.af.edu\DFCS - Documents\Courses\CS426\CS426 - 21 Fall\04 - PEX\Toy Language 2\obj\x86\Debug\ConsoleApplication.exe
+C:\Users\Adrian de Freitas\afacademy.af.edu\DFCS - Documents\Courses\CS426\CS426 - 21 Fall\04 - PEX\Toy Language 2\obj\x86\Debug\ConsoleApplication.pdb
+C:\Users\Adrian de Freitas\afacademy.af.edu\DFCS - Documents\Courses\CS426\CS426 - 21 Fall\04 - PEX\Toy Language 3\bin\Debug\ConsoleApplication.exe
+C:\Users\Adrian de Freitas\afacademy.af.edu\DFCS - Documents\Courses\CS426\CS426 - 21 Fall\04 - PEX\Toy Language 3\bin\Debug\ConsoleApplication.pdb
+C:\Users\Adrian de Freitas\afacademy.af.edu\DFCS - Documents\Courses\CS426\CS426 - 21 Fall\04 - PEX\Toy Language 3\obj\x86\Debug\ToyLanguage.csprojAssemblyReference.cache
+C:\Users\Adrian de Freitas\afacademy.af.edu\DFCS - Documents\Courses\CS426\CS426 - 21 Fall\04 - PEX\Toy Language 3\obj\x86\Debug\ToyLanguage.csproj.CoreCompileInputs.cache
+C:\Users\Adrian de Freitas\afacademy.af.edu\DFCS - Documents\Courses\CS426\CS426 - 21 Fall\04 - PEX\Toy Language 3\obj\x86\Debug\ConsoleApplication.exe
+C:\Users\Adrian de Freitas\afacademy.af.edu\DFCS - Documents\Courses\CS426\CS426 - 21 Fall\04 - PEX\Toy Language 3\obj\x86\Debug\ConsoleApplication.pdb
+C:\Users\C22Mason.Utt\OneDrive - afacademy.af.edu\comp426\pex3\Toy Language 3\Toy Language 3\bin\Debug\ConsoleApplication.exe
+C:\Users\C22Mason.Utt\OneDrive - afacademy.af.edu\comp426\pex3\Toy Language 3\Toy Language 3\bin\Debug\ConsoleApplication.pdb
+C:\Users\C22Mason.Utt\OneDrive - afacademy.af.edu\comp426\pex3\Toy Language 3\Toy Language 3\obj\x86\Debug\ToyLanguage.csproj.AssemblyReference.cache
+C:\Users\C22Mason.Utt\OneDrive - afacademy.af.edu\comp426\pex3\Toy Language 3\Toy Language 3\obj\x86\Debug\ToyLanguage.csproj.CoreCompileInputs.cache
+C:\Users\C22Mason.Utt\OneDrive - afacademy.af.edu\comp426\pex3\Toy Language 3\Toy Language 3\obj\x86\Debug\ConsoleApplication.exe
+C:\Users\C22Mason.Utt\OneDrive - afacademy.af.edu\comp426\pex3\Toy Language 3\Toy Language 3\obj\x86\Debug\ConsoleApplication.pdb
+C:\Users\C22Jake.Lee\Source\Repos\426PEX3\obj\x86\Debug\ToyLanguage.csproj.AssemblyReference.cache
+C:\Users\C22Jake.Lee\Source\Repos\426PEX3\obj\x86\Debug\ToyLanguage.csproj.SuggestedBindingRedirects.cache
+C:\Users\C22Jake.Lee\Source\Repos\426PEX3\obj\x86\Debug\ToyLanguage.csproj.CoreCompileInputs.cache
+C:\Users\C22Jake.Lee\Source\Repos\426PEX3\obj\x86\Debug\ConsoleApplication.exe
+C:\Users\C22Jake.Lee\Source\Repos\426PEX3\obj\x86\Debug\ConsoleApplication.pdb
+C:\Users\C22Jake.Lee\source\repos\426PEX3\bin\Debug\ConsoleApplication.exe.config
+C:\Users\C22Jake.Lee\source\repos\426PEX3\bin\Debug\ConsoleApplication.exe
+C:\Users\C22Jake.Lee\source\repos\426PEX3\bin\Debug\ConsoleApplication.pdb
