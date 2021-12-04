@@ -33,3 +33,6 @@ C:\Users\C22Jake.Lee\Desktop\Fall 2021\CS 426 - Languages and Machines\PEX4\Toy 
 C:\Users\C22Jake.Lee\Desktop\Fall 2021\CS 426 - Languages and Machines\PEX4\Toy Language 3\Toy Language 3\426PEX4\obj\x86\Debug\ToyLanguage.csproj.CoreCompileInputs.cache
 C:\Users\C22Jake.Lee\Desktop\Fall 2021\CS 426 - Languages and Machines\PEX4\Toy Language 3\Toy Language 3\426PEX4\obj\x86\Debug\ConsoleApplication.exe
 C:\Users\C22Jake.Lee\Desktop\Fall 2021\CS 426 - Languages and Machines\PEX4\Toy Language 3\Toy Language 3\426PEX4\obj\x86\Debug\ConsoleApplication.pdb
+C:\Users\C22Mason.Utt\OneDrive - afacademy.af.edu\comp426\pex4\426PEX4\Toy Language 3\Toy Language 3\426PEX4\bin\Debug\ConsoleApplication.exe.config
+C:\Users\C22Mason.Utt\OneDrive - afacademy.af.edu\comp426\pex4\426PEX4\Toy Language 3\Toy Language 3\426PEX4\bin\Debug\ConsoleApplication.exe
+C:\Users\C22Mason.Utt\OneDrive - afacademy.af.edu\comp426\pex4\426PEX4\Toy Language 3\Toy Language 3\426PEX4\bin\Debug\ConsoleApplication.pdb
