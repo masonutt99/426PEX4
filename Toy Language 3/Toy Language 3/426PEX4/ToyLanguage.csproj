@@ -54,6 +54,7 @@
     <Compile Include="pex_main.cs" />
     <Compile Include="prods.cs" />
     <Compile Include="SemanticAnalyzer.cs" />
+    <Compile Include="testcases\pex4\pex4testcases.cs" />
     <Compile Include="tokens.cs" />
   </ItemGroup>
   <ItemGroup>
@@ -73,9 +74,7 @@
     <None Include="PEX_TEST.bat" />
     <None Include="README.parser" />
   </ItemGroup>
-  <ItemGroup>
-    <Folder Include="testcases\pex4\" />
-  </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSHARP.Targets" />
   <ProjectExtensions>
     <VisualStudio AllowExistingFolder="true" />
