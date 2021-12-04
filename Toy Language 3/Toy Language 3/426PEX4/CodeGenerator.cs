@@ -75,12 +75,12 @@ namespace CS426.analysis
             WriteLine(")\n");
         }
 
-        public override void OutAIntOperand(AIntOperand node)
+        public override void OutAIntexpOperand(AIntexpOperand node)
         {
-            WriteLine("\tldc.i4 " + node.GetInteger().Text);
+            WriteLine("\tldc.i4 " + node.GetInt().Text);
         }
 
-        public override void OutAStringOperand(AStringOperand node)
+        public override void OutAStringexpOperand(AStringexpOperand node)
         {
             WriteLine("\tldstr " + node.GetString().Text);
         }
@@ -95,17 +95,17 @@ namespace CS426.analysis
             WriteLine("\tstloc " + node.GetId().Text + "\n");
         }
 
-        public override void OutAAddExpression(AAddExpression node)
+        public override void OutAAddexpExpression5(AAddexpExpression5 node)
         {
             WriteLine("\tadd");
         }
 
-        public override void OutAMultiplyExpression2(AMultiplyExpression2 node)
+        public override void OutAMultexpExpression6(AMultexpExpression6 node)
         {
             WriteLine("\tmul");
         }
 
-        public override void OutANegativeExpression3(ANegativeExpression3 node)
+        public override void OutANegateexpExpression7(ANegateexpExpression7 node)
         {
             WriteLine("\tneg");
         }
@@ -134,26 +134,26 @@ namespace CS426.analysis
         }
 
 
-        public override void InASingleSubfunction(ASingleSubfunction node)
+        public override void InAFunctionDeclaration(AFunctionDeclaration node)
         {
             WriteLine(".method static void " + node.GetId().Text + "() cil managed");
             WriteLine("{");
             WriteLine("\t.maxstack 128\n");
         }
 
-        public override void OutASingleSubfunction(ASingleSubfunction node)
+        public override void OutAFunctionDeclaration(AFunctionDeclaration node)
         {
             WriteLine("\tret");
             WriteLine("}\n");
         }
 
-        public override void CaseAIfOneStatement(AIfOneStatement node)
+        public override void CaseAIfStatement(AIfStatement node)
         {
-            InAIfOneStatement(node);
+            InAIfStatement(node);
 
-            if (node.GetKeywordIf() != null)
+            if (node.GetIf() != null)
             {
-                node.GetKeywordIf().Apply(this);
+                node.GetIf().Apply(this);
             }
             if (node.GetLeftParenthesis() != null)
             {
@@ -203,7 +203,7 @@ namespace CS426.analysis
 
             WriteLine("\tLABEL_2:");
 
-            OutAIfOneStatement(node);
+            OutAIfStatement(node);
         }
     }
 }

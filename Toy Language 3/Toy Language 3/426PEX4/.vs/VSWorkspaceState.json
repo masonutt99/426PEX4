@@ -2,8 +2,9 @@
   "ExpandedNodes": [
     "",
     "\\testcases",
-    "\\testcases\\pex3"
+    "\\testcases\\pex3",
+    "\\testcases\\pex4"
   ],
-  "SelectedNode": "\\testcases\\pex3\\test2.txt",
+  "SelectedNode": "\\ToyLanguage.sln",
   "PreviewInSolutionExplorer": false
 }
