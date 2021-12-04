@@ -121,6 +121,10 @@ namespace CS426.analysis
             {
                 WriteLine("\tcall void [mscorlib]System.Console::Write(int32)");
             }
+            if (node.GetId().Text == "printFloat")
+            {
+                WriteLine("\tcall void [mscorlib]System.Console::Write(float32)");
+            }
             else if (node.GetId().Text == "printString")
             {
                 WriteLine("\tcall void [mscorlib]System.Console::Write(string)");
