@@ -34,7 +34,6 @@
 	stloc s
 
 	ldstr "i ="
-	ldstr "\n"
 	call void [mscorlib]System.Console::Write(string)
 
 	ldloc i
@@ -42,18 +41,22 @@
 	call void printInt()
 
 	ldstr "f1 ="
-	ldstr "\n"
 	call void [mscorlib]System.Console::Write(string)
 
 	ldloc f1
 	call void [mscorlib]System.Console::Write(float32)
 
 	ldstr "f2 ="
-	ldstr "\n"
 	call void [mscorlib]System.Console::Write(string)
 
 	ldloc f2
 	call void [mscorlib]System.Console::Write(float32)
+
+	ldstr "s ="
+	call void [mscorlib]System.Console::Write(string)
+
+	ldloc s
+	call void [mscorlib]System.Console::Write(string)
 
 
 	ret

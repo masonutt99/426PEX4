@@ -1,0 +1,27 @@
+﻿main{
+	int x;
+    x = 0;
+    float y;
+    f1 = 1.2;
+    string s;
+    s = "original string";
+
+    print("x (before) =");
+    printInt(x);
+    print("y (before) =");
+    printFloat(y);
+    print("s (before) = ");
+    printString(s);
+
+    x = 12345;
+    y = -6.789;
+    s = "modified string";
+
+    print("x (after) =");
+    printInt(x);
+    print("y (after) =");
+    printFloat(y);
+    print("s (after) = ");
+    printString(s);
+
+    }

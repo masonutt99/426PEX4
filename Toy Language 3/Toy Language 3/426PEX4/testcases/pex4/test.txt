@@ -9,10 +9,15 @@
     string s;
     s = "helloworld";
 
-    printLine("i =");
+    print("i =");
     printInt(i);
-    printLine("f1 =");
+
+    print("f1 =");
     printFloat(f1);
-    printLine("f2 =");
+
+    print("f2 =");
     printFloat(f2);
+
+    print("s =");
+    printString(s);
     }

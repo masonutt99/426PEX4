@@ -129,6 +129,12 @@ namespace CS426.analysis
             {
                 WriteLine("\tcall void [mscorlib]System.Console::Write(string)");
             }
+            // elif (node.GetId().Text == "print")   check if param is string if so print it!
+            else if (node.GetId().Text == "print")
+            {
+                WriteLine("\tcall void [mscorlib]System.Console::Write(string)");
+            }
+
             else if (node.GetId().Text == "printLine")
             {
                 WriteLine("\tldstr \"\\n\"");

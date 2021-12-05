@@ -63,6 +63,7 @@
     <Content Include="testcases\pex2\test1.txt" />
     <Content Include="testcases\pex3\test1.txt" />
     <Content Include="testcases\pex4\test.txt" />
+    <Content Include="testcases\pex4\test2.txt" />
   </ItemGroup>
   <ItemGroup>
     <None Include="app.config" />
