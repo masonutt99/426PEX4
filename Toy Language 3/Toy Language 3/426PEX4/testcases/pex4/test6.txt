@@ -1,3 +1,19 @@
 ﻿main{
 
+	if (1.0 + 1.0 < 3.0) {
+      print("  If (true) Statement Passes");
+      printLine();
+    }
+    else {
+      print("  adrian");
+      printLine();
+    }
+    if (5.0 * 3.0 < 1) {
+      print("  boby");
+      printLine();
+    }
+    else {
+      print("  If (false) Statement Passes");
+      printLine();
+    }
 }

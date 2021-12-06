@@ -103,8 +103,8 @@ Productions
 	declare_statement = [type]:id [varname]:id eol;
 	assign_statement = id assign expression eol;
 	
-	elsee = else left_curly statements right_curly;
-	if_statement = if left_parenthesis expression right_parenthesis left_curly statements right_curly elsee?; 
+	
+	if_statement = if left_parenthesis expression right_parenthesis [left1]:left_curly [stat1]:statements [right1]:right_curly | {else} if left_parenthesis expression right_parenthesis [left1]:left_curly [stat1]:statements [right1]:right_curly else [left2]:left_curly [stat2]:statements [right2]:right_curly  ; 
 
 
 

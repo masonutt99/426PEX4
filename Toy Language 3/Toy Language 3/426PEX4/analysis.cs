@@ -33,8 +33,8 @@ public interface Analysis : Switch
     void CaseAFunctionCallStatementStatement(AFunctionCallStatementStatement node);
     void CaseADeclareStatement(ADeclareStatement node);
     void CaseAAssignStatement(AAssignStatement node);
-    void CaseAElsee(AElsee node);
     void CaseAIfStatement(AIfStatement node);
+    void CaseAElseIfStatement(AElseIfStatement node);
     void CaseAWhileStatement(AWhileStatement node);
     void CaseAFunctionCallStatement(AFunctionCallStatement node);
     void CaseAOrexpExpression(AOrexpExpression node);
@@ -246,11 +246,11 @@ public class AnalysisAdapter : Analysis
     {
         DefaultCase(node);
     }
-    public virtual void CaseAElsee(AElsee node)
+    public virtual void CaseAIfStatement(AIfStatement node)
     {
         DefaultCase(node);
     }
-    public virtual void CaseAIfStatement(AIfStatement node)
+    public virtual void CaseAElseIfStatement(AElseIfStatement node)
     {
         DefaultCase(node);
     }
@@ -1009,37 +1009,6 @@ public class DepthFirstAdapter : AnalysisAdapter
         }
         OutAAssignStatement(node);
     }
-    public virtual void InAElsee(AElsee node)
-    {
-        DefaultIn(node);
-    }
-
-    public virtual void OutAElsee(AElsee node)
-    {
-        DefaultOut(node);
-    }
-
-    public override void CaseAElsee(AElsee node)
-    {
-        InAElsee(node);
-        if(node.GetElse() != null)
-        {
-            node.GetElse().Apply(this);
-        }
-        if(node.GetLeftCurly() != null)
-        {
-            node.GetLeftCurly().Apply(this);
-        }
-        if(node.GetStatements() != null)
-        {
-            node.GetStatements().Apply(this);
-        }
-        if(node.GetRightCurly() != null)
-        {
-            node.GetRightCurly().Apply(this);
-        }
-        OutAElsee(node);
-    }
     public virtual void InAIfStatement(AIfStatement node)
     {
         DefaultIn(node);
@@ -1069,23 +1038,78 @@ public class DepthFirstAdapter : AnalysisAdapter
         {
             node.GetRightParenthesis().Apply(this);
         }
-        if(node.GetLeftCurly() != null)
+        if(node.GetLeft1() != null)
         {
-            node.GetLeftCurly().Apply(this);
+            node.GetLeft1().Apply(this);
         }
-        if(node.GetStatements() != null)
+        if(node.GetStat1() != null)
         {
-            node.GetStatements().Apply(this);
+            node.GetStat1().Apply(this);
         }
-        if(node.GetRightCurly() != null)
+        if(node.GetRight1() != null)
         {
-            node.GetRightCurly().Apply(this);
-        }
-        if(node.GetElsee() != null)
-        {
-            node.GetElsee().Apply(this);
+            node.GetRight1().Apply(this);
         }
         OutAIfStatement(node);
+    }
+    public virtual void InAElseIfStatement(AElseIfStatement node)
+    {
+        DefaultIn(node);
+    }
+
+    public virtual void OutAElseIfStatement(AElseIfStatement node)
+    {
+        DefaultOut(node);
+    }
+
+    public override void CaseAElseIfStatement(AElseIfStatement node)
+    {
+        InAElseIfStatement(node);
+        if(node.GetIf() != null)
+        {
+            node.GetIf().Apply(this);
+        }
+        if(node.GetLeftParenthesis() != null)
+        {
+            node.GetLeftParenthesis().Apply(this);
+        }
+        if(node.GetExpression() != null)
+        {
+            node.GetExpression().Apply(this);
+        }
+        if(node.GetRightParenthesis() != null)
+        {
+            node.GetRightParenthesis().Apply(this);
+        }
+        if(node.GetLeft1() != null)
+        {
+            node.GetLeft1().Apply(this);
+        }
+        if(node.GetStat1() != null)
+        {
+            node.GetStat1().Apply(this);
+        }
+        if(node.GetRight1() != null)
+        {
+            node.GetRight1().Apply(this);
+        }
+        if(node.GetElse() != null)
+        {
+            node.GetElse().Apply(this);
+        }
+        if(node.GetLeft2() != null)
+        {
+            node.GetLeft2().Apply(this);
+        }
+        if(node.GetStat2() != null)
+        {
+            node.GetStat2().Apply(this);
+        }
+        if(node.GetRight2() != null)
+        {
+            node.GetRight2().Apply(this);
+        }
+        OutAElseIfStatement(node);
     }
     public virtual void InAWhileStatement(AWhileStatement node)
     {
@@ -2449,37 +2473,6 @@ public class ReversedDepthFirstAdapter : AnalysisAdapter
         }
         OutAAssignStatement(node);
     }
-    public virtual void InAElsee(AElsee node)
-    {
-        DefaultIn(node);
-    }
-
-    public virtual void OutAElsee(AElsee node)
-    {
-        DefaultOut(node);
-    }
-
-    public override void CaseAElsee(AElsee node)
-    {
-        InAElsee(node);
-        if(node.GetRightCurly() != null)
-        {
-            node.GetRightCurly().Apply(this);
-        }
-        if(node.GetStatements() != null)
-        {
-            node.GetStatements().Apply(this);
-        }
-        if(node.GetLeftCurly() != null)
-        {
-            node.GetLeftCurly().Apply(this);
-        }
-        if(node.GetElse() != null)
-        {
-            node.GetElse().Apply(this);
-        }
-        OutAElsee(node);
-    }
     public virtual void InAIfStatement(AIfStatement node)
     {
         DefaultIn(node);
@@ -2493,21 +2486,17 @@ public class ReversedDepthFirstAdapter : AnalysisAdapter
     public override void CaseAIfStatement(AIfStatement node)
     {
         InAIfStatement(node);
-        if(node.GetElsee() != null)
+        if(node.GetRight1() != null)
         {
-            node.GetElsee().Apply(this);
+            node.GetRight1().Apply(this);
         }
-        if(node.GetRightCurly() != null)
+        if(node.GetStat1() != null)
         {
-            node.GetRightCurly().Apply(this);
+            node.GetStat1().Apply(this);
         }
-        if(node.GetStatements() != null)
+        if(node.GetLeft1() != null)
         {
-            node.GetStatements().Apply(this);
-        }
-        if(node.GetLeftCurly() != null)
-        {
-            node.GetLeftCurly().Apply(this);
+            node.GetLeft1().Apply(this);
         }
         if(node.GetRightParenthesis() != null)
         {
@@ -2526,6 +2515,65 @@ public class ReversedDepthFirstAdapter : AnalysisAdapter
             node.GetIf().Apply(this);
         }
         OutAIfStatement(node);
+    }
+    public virtual void InAElseIfStatement(AElseIfStatement node)
+    {
+        DefaultIn(node);
+    }
+
+    public virtual void OutAElseIfStatement(AElseIfStatement node)
+    {
+        DefaultOut(node);
+    }
+
+    public override void CaseAElseIfStatement(AElseIfStatement node)
+    {
+        InAElseIfStatement(node);
+        if(node.GetRight2() != null)
+        {
+            node.GetRight2().Apply(this);
+        }
+        if(node.GetStat2() != null)
+        {
+            node.GetStat2().Apply(this);
+        }
+        if(node.GetLeft2() != null)
+        {
+            node.GetLeft2().Apply(this);
+        }
+        if(node.GetElse() != null)
+        {
+            node.GetElse().Apply(this);
+        }
+        if(node.GetRight1() != null)
+        {
+            node.GetRight1().Apply(this);
+        }
+        if(node.GetStat1() != null)
+        {
+            node.GetStat1().Apply(this);
+        }
+        if(node.GetLeft1() != null)
+        {
+            node.GetLeft1().Apply(this);
+        }
+        if(node.GetRightParenthesis() != null)
+        {
+            node.GetRightParenthesis().Apply(this);
+        }
+        if(node.GetExpression() != null)
+        {
+            node.GetExpression().Apply(this);
+        }
+        if(node.GetLeftParenthesis() != null)
+        {
+            node.GetLeftParenthesis().Apply(this);
+        }
+        if(node.GetIf() != null)
+        {
+            node.GetIf().Apply(this);
+        }
+        OutAElseIfStatement(node);
     }
     public virtual void InAWhileStatement(AWhileStatement node)
     {

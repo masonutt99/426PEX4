@@ -48,10 +48,6 @@ public abstract class PAssignStatement : Node
 {
 }
 
-public abstract class PElsee : Node
-{
-}
-
 public abstract class PIfStatement : Node
 {
 }
@@ -2336,211 +2332,15 @@ public sealed class AAssignStatement : PAssignStatement
     }
 
 }
-public sealed class AElsee : PElsee
-{
-    private TElse _else_;
-    private TLeftCurly _left_curly_;
-    private PStatements _statements_;
-    private TRightCurly _right_curly_;
-
-    public AElsee ()
-    {
-    }
-
-    public AElsee (
-            TElse _else_,
-            TLeftCurly _left_curly_,
-            PStatements _statements_,
-            TRightCurly _right_curly_
-    )
-    {
-        SetElse (_else_);
-        SetLeftCurly (_left_curly_);
-        SetStatements (_statements_);
-        SetRightCurly (_right_curly_);
-    }
-
-    public override Object Clone()
-    {
-        return new AElsee (
-            (TElse)CloneNode (_else_),
-            (TLeftCurly)CloneNode (_left_curly_),
-            (PStatements)CloneNode (_statements_),
-            (TRightCurly)CloneNode (_right_curly_)
-        );
-    }
-
-    public override void Apply(Switch sw)
-    {
-        ((Analysis) sw).CaseAElsee(this);
-    }
-
-    public TElse GetElse ()
-    {
-        return _else_;
-    }
-
-    public void SetElse (TElse node)
-    {
-        if(_else_ != null)
-        {
-            _else_.Parent(null);
-        }
-
-        if(node != null)
-        {
-            if(node.Parent() != null)
-            {
-                node.Parent().RemoveChild(node);
-            }
-
-            node.Parent(this);
-        }
-
-        _else_ = node;
-    }
-    public TLeftCurly GetLeftCurly ()
-    {
-        return _left_curly_;
-    }
-
-    public void SetLeftCurly (TLeftCurly node)
-    {
-        if(_left_curly_ != null)
-        {
-            _left_curly_.Parent(null);
-        }
-
-        if(node != null)
-        {
-            if(node.Parent() != null)
-            {
-                node.Parent().RemoveChild(node);
-            }
-
-            node.Parent(this);
-        }
-
-        _left_curly_ = node;
-    }
-    public PStatements GetStatements ()
-    {
-        return _statements_;
-    }
-
-    public void SetStatements (PStatements node)
-    {
-        if(_statements_ != null)
-        {
-            _statements_.Parent(null);
-        }
-
-        if(node != null)
-        {
-            if(node.Parent() != null)
-            {
-                node.Parent().RemoveChild(node);
-            }
-
-            node.Parent(this);
-        }
-
-        _statements_ = node;
-    }
-    public TRightCurly GetRightCurly ()
-    {
-        return _right_curly_;
-    }
-
-    public void SetRightCurly (TRightCurly node)
-    {
-        if(_right_curly_ != null)
-        {
-            _right_curly_.Parent(null);
-        }
-
-        if(node != null)
-        {
-            if(node.Parent() != null)
-            {
-                node.Parent().RemoveChild(node);
-            }
-
-            node.Parent(this);
-        }
-
-        _right_curly_ = node;
-    }
-
-    public override string ToString()
-    {
-        return ""
-            + ToString (_else_)
-            + ToString (_left_curly_)
-            + ToString (_statements_)
-            + ToString (_right_curly_)
-        ;
-    }
-
-    internal override void RemoveChild(Node child)
-    {
-        if ( _else_ == child )
-        {
-            _else_ = null;
-            return;
-        }
-        if ( _left_curly_ == child )
-        {
-            _left_curly_ = null;
-            return;
-        }
-        if ( _statements_ == child )
-        {
-            _statements_ = null;
-            return;
-        }
-        if ( _right_curly_ == child )
-        {
-            _right_curly_ = null;
-            return;
-        }
-    }
-
-    internal override void ReplaceChild(Node oldChild, Node newChild)
-    {
-        if ( _else_ == oldChild )
-        {
-            SetElse ((TElse) newChild);
-            return;
-        }
-        if ( _left_curly_ == oldChild )
-        {
-            SetLeftCurly ((TLeftCurly) newChild);
-            return;
-        }
-        if ( _statements_ == oldChild )
-        {
-            SetStatements ((PStatements) newChild);
-            return;
-        }
-        if ( _right_curly_ == oldChild )
-        {
-            SetRightCurly ((TRightCurly) newChild);
-            return;
-        }
-    }
-
-}
 public sealed class AIfStatement : PIfStatement
 {
     private TIf _if_;
     private TLeftParenthesis _left_parenthesis_;
     private PExpression _expression_;
     private TRightParenthesis _right_parenthesis_;
-    private TLeftCurly _left_curly_;
-    private PStatements _statements_;
-    private TRightCurly _right_curly_;
-    private PElsee _elsee_;
+    private TLeftCurly _left1_;
+    private PStatements _stat1_;
+    private TRightCurly _right1_;
 
     public AIfStatement ()
     {
@@ -2551,20 +2351,18 @@ public sealed class AIfStatement : PIfStatement
             TLeftParenthesis _left_parenthesis_,
             PExpression _expression_,
             TRightParenthesis _right_parenthesis_,
-            TLeftCurly _left_curly_,
-            PStatements _statements_,
-            TRightCurly _right_curly_,
-            PElsee _elsee_
+            TLeftCurly _left1_,
+            PStatements _stat1_,
+            TRightCurly _right1_
     )
     {
         SetIf (_if_);
         SetLeftParenthesis (_left_parenthesis_);
         SetExpression (_expression_);
         SetRightParenthesis (_right_parenthesis_);
-        SetLeftCurly (_left_curly_);
-        SetStatements (_statements_);
-        SetRightCurly (_right_curly_);
-        SetElsee (_elsee_);
+        SetLeft1 (_left1_);
+        SetStat1 (_stat1_);
+        SetRight1 (_right1_);
     }
 
     public override Object Clone()
@@ -2574,10 +2372,9 @@ public sealed class AIfStatement : PIfStatement
             (TLeftParenthesis)CloneNode (_left_parenthesis_),
             (PExpression)CloneNode (_expression_),
             (TRightParenthesis)CloneNode (_right_parenthesis_),
-            (TLeftCurly)CloneNode (_left_curly_),
-            (PStatements)CloneNode (_statements_),
-            (TRightCurly)CloneNode (_right_curly_),
-            (PElsee)CloneNode (_elsee_)
+            (TLeftCurly)CloneNode (_left1_),
+            (PStatements)CloneNode (_stat1_),
+            (TRightCurly)CloneNode (_right1_)
         );
     }
 
@@ -2682,16 +2479,16 @@ public sealed class AIfStatement : PIfStatement
 
         _right_parenthesis_ = node;
     }
-    public TLeftCurly GetLeftCurly ()
+    public TLeftCurly GetLeft1 ()
     {
-        return _left_curly_;
+        return _left1_;
     }
 
-    public void SetLeftCurly (TLeftCurly node)
+    public void SetLeft1 (TLeftCurly node)
     {
-        if(_left_curly_ != null)
+        if(_left1_ != null)
         {
-            _left_curly_.Parent(null);
+            _left1_.Parent(null);
         }
 
         if(node != null)
@@ -2704,18 +2501,18 @@ public sealed class AIfStatement : PIfStatement
             node.Parent(this);
         }
 
-        _left_curly_ = node;
+        _left1_ = node;
     }
-    public PStatements GetStatements ()
+    public PStatements GetStat1 ()
     {
-        return _statements_;
+        return _stat1_;
     }
 
-    public void SetStatements (PStatements node)
+    public void SetStat1 (PStatements node)
     {
-        if(_statements_ != null)
+        if(_stat1_ != null)
         {
-            _statements_.Parent(null);
+            _stat1_.Parent(null);
         }
 
         if(node != null)
@@ -2728,18 +2525,18 @@ public sealed class AIfStatement : PIfStatement
             node.Parent(this);
         }
 
-        _statements_ = node;
+        _stat1_ = node;
     }
-    public TRightCurly GetRightCurly ()
+    public TRightCurly GetRight1 ()
     {
-        return _right_curly_;
+        return _right1_;
     }
 
-    public void SetRightCurly (TRightCurly node)
+    public void SetRight1 (TRightCurly node)
     {
-        if(_right_curly_ != null)
+        if(_right1_ != null)
         {
-            _right_curly_.Parent(null);
+            _right1_.Parent(null);
         }
 
         if(node != null)
@@ -2752,31 +2549,7 @@ public sealed class AIfStatement : PIfStatement
             node.Parent(this);
         }
 
-        _right_curly_ = node;
-    }
-    public PElsee GetElsee ()
-    {
-        return _elsee_;
-    }
-
-    public void SetElsee (PElsee node)
-    {
-        if(_elsee_ != null)
-        {
-            _elsee_.Parent(null);
-        }
-
-        if(node != null)
-        {
-            if(node.Parent() != null)
-            {
-                node.Parent().RemoveChild(node);
-            }
-
-            node.Parent(this);
-        }
-
-        _elsee_ = node;
+        _right1_ = node;
     }
 
     public override string ToString()
@@ -2786,10 +2559,9 @@ public sealed class AIfStatement : PIfStatement
             + ToString (_left_parenthesis_)
             + ToString (_expression_)
             + ToString (_right_parenthesis_)
-            + ToString (_left_curly_)
-            + ToString (_statements_)
-            + ToString (_right_curly_)
-            + ToString (_elsee_)
+            + ToString (_left1_)
+            + ToString (_stat1_)
+            + ToString (_right1_)
         ;
     }
 
@@ -2815,24 +2587,19 @@ public sealed class AIfStatement : PIfStatement
             _right_parenthesis_ = null;
             return;
         }
-        if ( _left_curly_ == child )
+        if ( _left1_ == child )
         {
-            _left_curly_ = null;
+            _left1_ = null;
             return;
         }
-        if ( _statements_ == child )
+        if ( _stat1_ == child )
         {
-            _statements_ = null;
+            _stat1_ = null;
             return;
         }
-        if ( _right_curly_ == child )
+        if ( _right1_ == child )
         {
-            _right_curly_ = null;
-            return;
-        }
-        if ( _elsee_ == child )
-        {
-            _elsee_ = null;
+            _right1_ = null;
             return;
         }
     }
@@ -2859,24 +2626,487 @@ public sealed class AIfStatement : PIfStatement
             SetRightParenthesis ((TRightParenthesis) newChild);
             return;
         }
-        if ( _left_curly_ == oldChild )
+        if ( _left1_ == oldChild )
         {
-            SetLeftCurly ((TLeftCurly) newChild);
+            SetLeft1 ((TLeftCurly) newChild);
             return;
         }
-        if ( _statements_ == oldChild )
+        if ( _stat1_ == oldChild )
         {
-            SetStatements ((PStatements) newChild);
+            SetStat1 ((PStatements) newChild);
             return;
         }
-        if ( _right_curly_ == oldChild )
+        if ( _right1_ == oldChild )
         {
-            SetRightCurly ((TRightCurly) newChild);
+            SetRight1 ((TRightCurly) newChild);
             return;
         }
-        if ( _elsee_ == oldChild )
+    }
+
+}
+public sealed class AElseIfStatement : PIfStatement
+{
+    private TIf _if_;
+    private TLeftParenthesis _left_parenthesis_;
+    private PExpression _expression_;
+    private TRightParenthesis _right_parenthesis_;
+    private TLeftCurly _left1_;
+    private PStatements _stat1_;
+    private TRightCurly _right1_;
+    private TElse _else_;
+    private TLeftCurly _left2_;
+    private PStatements _stat2_;
+    private TRightCurly _right2_;
+
+    public AElseIfStatement ()
+    {
+    }
+
+    public AElseIfStatement (
+            TIf _if_,
+            TLeftParenthesis _left_parenthesis_,
+            PExpression _expression_,
+            TRightParenthesis _right_parenthesis_,
+            TLeftCurly _left1_,
+            PStatements _stat1_,
+            TRightCurly _right1_,
+            TElse _else_,
+            TLeftCurly _left2_,
+            PStatements _stat2_,
+            TRightCurly _right2_
+    )
+    {
+        SetIf (_if_);
+        SetLeftParenthesis (_left_parenthesis_);
+        SetExpression (_expression_);
+        SetRightParenthesis (_right_parenthesis_);
+        SetLeft1 (_left1_);
+        SetStat1 (_stat1_);
+        SetRight1 (_right1_);
+        SetElse (_else_);
+        SetLeft2 (_left2_);
+        SetStat2 (_stat2_);
+        SetRight2 (_right2_);
+    }
+
+    public override Object Clone()
+    {
+        return new AElseIfStatement (
+            (TIf)CloneNode (_if_),
+            (TLeftParenthesis)CloneNode (_left_parenthesis_),
+            (PExpression)CloneNode (_expression_),
+            (TRightParenthesis)CloneNode (_right_parenthesis_),
+            (TLeftCurly)CloneNode (_left1_),
+            (PStatements)CloneNode (_stat1_),
+            (TRightCurly)CloneNode (_right1_),
+            (TElse)CloneNode (_else_),
+            (TLeftCurly)CloneNode (_left2_),
+            (PStatements)CloneNode (_stat2_),
+            (TRightCurly)CloneNode (_right2_)
+        );
+    }
+
+    public override void Apply(Switch sw)
+    {
+        ((Analysis) sw).CaseAElseIfStatement(this);
+    }
+
+    public TIf GetIf ()
+    {
+        return _if_;
+    }
+
+    public void SetIf (TIf node)
+    {
+        if(_if_ != null)
         {
-            SetElsee ((PElsee) newChild);
+            _if_.Parent(null);
+        }
+
+        if(node != null)
+        {
+            if(node.Parent() != null)
+            {
+                node.Parent().RemoveChild(node);
+            }
+
+            node.Parent(this);
+        }
+
+        _if_ = node;
+    }
+    public TLeftParenthesis GetLeftParenthesis ()
+    {
+        return _left_parenthesis_;
+    }
+
+    public void SetLeftParenthesis (TLeftParenthesis node)
+    {
+        if(_left_parenthesis_ != null)
+        {
+            _left_parenthesis_.Parent(null);
+        }
+
+        if(node != null)
+        {
+            if(node.Parent() != null)
+            {
+                node.Parent().RemoveChild(node);
+            }
+
+            node.Parent(this);
+        }
+
+        _left_parenthesis_ = node;
+    }
+    public PExpression GetExpression ()
+    {
+        return _expression_;
+    }
+
+    public void SetExpression (PExpression node)
+    {
+        if(_expression_ != null)
+        {
+            _expression_.Parent(null);
+        }
+
+        if(node != null)
+        {
+            if(node.Parent() != null)
+            {
+                node.Parent().RemoveChild(node);
+            }
+
+            node.Parent(this);
+        }
+
+        _expression_ = node;
+    }
+    public TRightParenthesis GetRightParenthesis ()
+    {
+        return _right_parenthesis_;
+    }
+
+    public void SetRightParenthesis (TRightParenthesis node)
+    {
+        if(_right_parenthesis_ != null)
+        {
+            _right_parenthesis_.Parent(null);
+        }
+
+        if(node != null)
+        {
+            if(node.Parent() != null)
+            {
+                node.Parent().RemoveChild(node);
+            }
+
+            node.Parent(this);
+        }
+
+        _right_parenthesis_ = node;
+    }
+    public TLeftCurly GetLeft1 ()
+    {
+        return _left1_;
+    }
+
+    public void SetLeft1 (TLeftCurly node)
+    {
+        if(_left1_ != null)
+        {
+            _left1_.Parent(null);
+        }
+
+        if(node != null)
+        {
+            if(node.Parent() != null)
+            {
+                node.Parent().RemoveChild(node);
+            }
+
+            node.Parent(this);
+        }
+
+        _left1_ = node;
+    }
+    public PStatements GetStat1 ()
+    {
+        return _stat1_;
+    }
+
+    public void SetStat1 (PStatements node)
+    {
+        if(_stat1_ != null)
+        {
+            _stat1_.Parent(null);
+        }
+
+        if(node != null)
+        {
+            if(node.Parent() != null)
+            {
+                node.Parent().RemoveChild(node);
+            }
+
+            node.Parent(this);
+        }
+
+        _stat1_ = node;
+    }
+    public TRightCurly GetRight1 ()
+    {
+        return _right1_;
+    }
+
+    public void SetRight1 (TRightCurly node)
+    {
+        if(_right1_ != null)
+        {
+            _right1_.Parent(null);
+        }
+
+        if(node != null)
+        {
+            if(node.Parent() != null)
+            {
+                node.Parent().RemoveChild(node);
+            }
+
+            node.Parent(this);
+        }
+
+        _right1_ = node;
+    }
+    public TElse GetElse ()
+    {
+        return _else_;
+    }
+
+    public void SetElse (TElse node)
+    {
+        if(_else_ != null)
+        {
+            _else_.Parent(null);
+        }
+
+        if(node != null)
+        {
+            if(node.Parent() != null)
+            {
+                node.Parent().RemoveChild(node);
+            }
+
+            node.Parent(this);
+        }
+
+        _else_ = node;
+    }
+    public TLeftCurly GetLeft2 ()
+    {
+        return _left2_;
+    }
+
+    public void SetLeft2 (TLeftCurly node)
+    {
+        if(_left2_ != null)
+        {
+            _left2_.Parent(null);
+        }
+
+        if(node != null)
+        {
+            if(node.Parent() != null)
+            {
+                node.Parent().RemoveChild(node);
+            }
+
+            node.Parent(this);
+        }
+
+        _left2_ = node;
+    }
+    public PStatements GetStat2 ()
+    {
+        return _stat2_;
+    }
+
+    public void SetStat2 (PStatements node)
+    {
+        if(_stat2_ != null)
+        {
+            _stat2_.Parent(null);
+        }
+
+        if(node != null)
+        {
+            if(node.Parent() != null)
+            {
+                node.Parent().RemoveChild(node);
+            }
+
+            node.Parent(this);
+        }
+
+        _stat2_ = node;
+    }
+    public TRightCurly GetRight2 ()
+    {
+        return _right2_;
+    }
+
+    public void SetRight2 (TRightCurly node)
+    {
+        if(_right2_ != null)
+        {
+            _right2_.Parent(null);
+        }
+
+        if(node != null)
+        {
+            if(node.Parent() != null)
+            {
+                node.Parent().RemoveChild(node);
+            }
+
+            node.Parent(this);
+        }
+
+        _right2_ = node;
+    }
+
+    public override string ToString()
+    {
+        return ""
+            + ToString (_if_)
+            + ToString (_left_parenthesis_)
+            + ToString (_expression_)
+            + ToString (_right_parenthesis_)
+            + ToString (_left1_)
+            + ToString (_stat1_)
+            + ToString (_right1_)
+            + ToString (_else_)
+            + ToString (_left2_)
+            + ToString (_stat2_)
+            + ToString (_right2_)
+        ;
+    }
+
+    internal override void RemoveChild(Node child)
+    {
+        if ( _if_ == child )
+        {
+            _if_ = null;
+            return;
+        }
+        if ( _left_parenthesis_ == child )
+        {
+            _left_parenthesis_ = null;
+            return;
+        }
+        if ( _expression_ == child )
+        {
+            _expression_ = null;
+            return;
+        }
+        if ( _right_parenthesis_ == child )
+        {
+            _right_parenthesis_ = null;
+            return;
+        }
+        if ( _left1_ == child )
+        {
+            _left1_ = null;
+            return;
+        }
+        if ( _stat1_ == child )
+        {
+            _stat1_ = null;
+            return;
+        }
+        if ( _right1_ == child )
+        {
+            _right1_ = null;
+            return;
+        }
+        if ( _else_ == child )
+        {
+            _else_ = null;
+            return;
+        }
+        if ( _left2_ == child )
+        {
+            _left2_ = null;
+            return;
+        }
+        if ( _stat2_ == child )
+        {
+            _stat2_ = null;
+            return;
+        }
+        if ( _right2_ == child )
+        {
+            _right2_ = null;
+            return;
+        }
+    }
+
+    internal override void ReplaceChild(Node oldChild, Node newChild)
+    {
+        if ( _if_ == oldChild )
+        {
+            SetIf ((TIf) newChild);
+            return;
+        }
+        if ( _left_parenthesis_ == oldChild )
+        {
+            SetLeftParenthesis ((TLeftParenthesis) newChild);
+            return;
+        }
+        if ( _expression_ == oldChild )
+        {
+            SetExpression ((PExpression) newChild);
+            return;
+        }
+        if ( _right_parenthesis_ == oldChild )
+        {
+            SetRightParenthesis ((TRightParenthesis) newChild);
+            return;
+        }
+        if ( _left1_ == oldChild )
+        {
+            SetLeft1 ((TLeftCurly) newChild);
+            return;
+        }
+        if ( _stat1_ == oldChild )
+        {
+            SetStat1 ((PStatements) newChild);
+            return;
+        }
+        if ( _right1_ == oldChild )
+        {
+            SetRight1 ((TRightCurly) newChild);
+            return;
+        }
+        if ( _else_ == oldChild )
+        {
+            SetElse ((TElse) newChild);
+            return;
+        }
+        if ( _left2_ == oldChild )
+        {
+            SetLeft2 ((TLeftCurly) newChild);
+            return;
+        }
+        if ( _stat2_ == oldChild )
+        {
+            SetStat2 ((PStatements) newChild);
+            return;
+        }
+        if ( _right2_ == oldChild )
+        {
+            SetRight2 ((TRightCurly) newChild);
             return;
         }
     }

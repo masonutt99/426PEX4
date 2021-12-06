@@ -15,6 +15,8 @@ namespace CS426.analysis
 
         private string var;
 
+
+
         // Create the Code Generator
         public CodeGenerator()
         {
@@ -248,6 +250,9 @@ namespace CS426.analysis
 
             // We are going compare whatever is on the stack to a 1
             // If it is 1, we're going to put a 1 on the stack, else a 0
+            
+           
+            
             if (var == ">")
             {
                 WriteLine("\tbgt LABEL_TRUE" + ifCounter);
@@ -287,9 +292,9 @@ namespace CS426.analysis
             {
                 node.GetRightParenthesis().Apply(this);
             }
-            if (node.GetLeftCurly() != null)
+            if (node.GetLeft1() != null)
             {
-                node.GetLeftCurly().Apply(this);
+                node.GetLeft1().Apply(this);
             }
 
             // This is where we do the if statment
@@ -301,34 +306,148 @@ namespace CS426.analysis
             WriteLine("\tbr LABEL_2" + ifCounter);
             WriteLine("\tLABEL_1" + ifCounter +":");
 
-            if (node.GetStatements() != null)
+            if (node.GetStat1() != null)
             {
-                node.GetStatements().Apply(this);
+                node.GetStat1().Apply(this);
             }
-            if (node.GetRightCurly() != null)
+            if (node.GetRight1() != null)
             {
-                node.GetRightCurly().Apply(this);
+                node.GetRight1().Apply(this);
             }
 
             WriteLine("\tbr LABEL_3" + ifCounter);
 
             WriteLine("\tLABEL_2" + ifCounter + ":");
 
-            if (node.GetStatements() != null)
-            {
-                //node.GetStatements().Apply(this);
-            }
-            if (node.GetRightCurly() != null)
-            {
-                node.GetRightCurly().Apply(this);
-            }
-            
-
-
             WriteLine("\tLABEL_3" + ifCounter + ":");
             //WriteLine("\tcall void [mscorlib]System.Console::Write(int32)");
             //WriteLine("\tcall void [mscorlib]System.Console::Write(int32)");
             
         }
+
+        public override void CaseAElseIfStatement(AElseIfStatement node)
+        {
+            
+            InAElseIfStatement(node);
+
+            ifCounter += 1;
+
+            if (node.GetIf() != null)
+            {
+                node.GetIf().Apply(this);
+            }
+            if (node.GetLeftParenthesis() != null)
+            {
+                node.GetLeftParenthesis().Apply(this);
+            }
+            if (node.GetExpression() != null)
+            {
+                node.GetExpression().Apply(this);
+            }
+
+            // We are going compare whatever is on the stack to a 1
+            // If it is 1, we're going to put a 1 on the stack, else a 0
+            if (var == ">")
+            {
+                WriteLine("\tbgt LABEL_TRUE" + ifCounter);
+
+            }
+            else if (var == "<")
+            {
+                WriteLine("\tblt LABEL_TRUE" + ifCounter);
+            }
+            else if (var == "==")
+            {
+                WriteLine("\tbeq LABEL_TRUE" + ifCounter);
+            }
+            else if (var == ">=")
+            {
+                WriteLine("\tbge LABEL_TRUE" + ifCounter);
+            }
+            else if (var == "<=")
+            {
+                WriteLine("\tble LABEL_TRUE" + ifCounter);
+            }
+            else if (var == "!=")
+            {
+                WriteLine("\tbne.un LABEL_TRUE" + ifCounter);
+            }
+            else
+            {
+                WriteLine("\tldc.i4 1");
+                WriteLine("\tbeq LABEL_TRUE" + ifCounter);
+            }
+            WriteLine("\t\tldc.i4 0");
+            WriteLine("\tbr LABEL_CONTINUE" + ifCounter);
+            WriteLine("\tLABEL_TRUE" + ifCounter + ":");
+            WriteLine("\t\tldc.i4 1");
+            WriteLine("\tLABEL_CONTINUE" + ifCounter + ":");
+
+            if (node.GetRightParenthesis() != null)
+            {
+                node.GetRightParenthesis().Apply(this);
+            }
+            if (node.GetLeft1() != null)
+            {
+                node.GetLeft1().Apply(this);
+            }
+
+            // This is where we do the if statment
+            // Note:  Toy Language does not support else
+            //        and it will not work for more than
+            //        a single IF throughout the program
+            WriteLine("\n\t// IF TRUE CODE GOES HERE");
+            WriteLine("\tbrtrue LABEL_1" + ifCounter);
+            WriteLine("\tbr LABEL_2" + ifCounter);
+            WriteLine("\tLABEL_1" + ifCounter + ":");
+
+            if (node.GetStat1() != null)
+            {
+                node.GetStat1().Apply(this);
+            }
+            if (node.GetRight1() != null)
+            {
+                node.GetRight1().Apply(this);
+            }
+
+            WriteLine("\tbr LABEL_3" + ifCounter);
+
+            WriteLine("\tLABEL_2" + ifCounter + ":");
+
+            if (node.GetStat1() != null)
+            {
+                //node.GetStat1().Apply(this);
+            }
+            if (node.GetRight1() != null)
+            {
+                node.GetRight1().Apply(this);
+            }
+            if (node.GetElse() != null)
+            {
+                node.GetElse().Apply(this);
+            }
+            if (node.GetLeft2() != null)
+            {
+                node.GetLeft2().Apply(this);
+            }
+            if (node.GetStat2() != null)
+            {
+                node.GetStat2().Apply(this);
+            }
+            if (node.GetRight2() != null)
+            {
+                node.GetRight2().Apply(this);
+            }
+
+            WriteLine("\tLABEL_3" + ifCounter + ":");
+            //WriteLine("\tcall void [mscorlib]System.Console::Write(int32)");
+            //WriteLine("\tcall void [mscorlib]System.Console::Write(int32)");
+
+        }
     }
 }
+    
+
+    
+    
+
