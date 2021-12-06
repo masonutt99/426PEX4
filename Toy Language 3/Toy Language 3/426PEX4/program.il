@@ -9,11 +9,13 @@
 	.maxstack 128
 	.entrypoint
 
-	ldc.r8 1.0
-	ldc.r8 1.0
-	add
-	ldc.r8 3.0
+	ldc.i4 1
+	ldc.i4 2
 	clt
+	ldc.i4 2
+	ldc.i4 3
+	clt
+	and
 	ldc.i4 1
 	beq LABEL_TRUE1
 		ldc.i4 0
@@ -26,7 +28,7 @@
 	brtrue LABEL_11
 	br LABEL_21
 	LABEL_11:
-	ldstr "  If (true) Statement Passes"
+	ldstr "And Works"
 	call void [mscorlib]System.Console::Write(string)
 
 	ldstr "\n"
@@ -34,18 +36,14 @@
 
 	br LABEL_31
 	LABEL_21:
-	ldstr "  adrian"
-	call void [mscorlib]System.Console::Write(string)
-
-	ldstr "\n"
-	call void [mscorlib]System.Console::Write(string)
-
 	LABEL_31:
-	ldc.r8 5.0
-	ldc.r8 3.0
-	mul
+	ldc.i4 2
 	ldc.i4 1
 	clt
+	ldc.i4 1
+	ldc.i4 2
+	clt
+	or
 	ldc.i4 1
 	beq LABEL_TRUE2
 		ldc.i4 0
@@ -58,7 +56,7 @@
 	brtrue LABEL_12
 	br LABEL_22
 	LABEL_12:
-	ldstr "  boby"
+	ldstr "Or works"
 	call void [mscorlib]System.Console::Write(string)
 
 	ldstr "\n"
@@ -66,13 +64,29 @@
 
 	br LABEL_32
 	LABEL_22:
-	ldstr "  If (false) Statement Passes"
-	call void [mscorlib]System.Console::Write(string)
-
-	ldstr "\n"
-	call void [mscorlib]System.Console::Write(string)
-
 	LABEL_32:
+	ldc.i4 2
+	ldc.i4 1
+	clt
+	brzero LABEL_TRUE3
+	ldc.i4 1
+	beq LABEL_TRUE3
+		ldc.i4 0
+	br LABEL_CONTINUE3
+	LABEL_TRUE3:
+		ldc.i4 1
+	LABEL_CONTINUE3:
+
+	// IF TRUE CODE GOES HERE
+	brtrue LABEL_13
+	br LABEL_23
+	LABEL_13:
+	ldstr "Not works"
+	call void [mscorlib]System.Console::Write(string)
+
+	br LABEL_33
+	LABEL_23:
+	LABEL_33:
 
 	ret
 }

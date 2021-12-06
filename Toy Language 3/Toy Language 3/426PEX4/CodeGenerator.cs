@@ -203,8 +203,9 @@ namespace CS426.analysis
 
         public override void OutANotexpExpression7(ANotexpExpression7 node)
         {
-            //WriteLine("\tldc.i4 1");
-            WriteLine("\tnot");
+            WriteLine("\tbrzero LABEL_TRUE" + ifCounter);
+            //WriteLine("\tnot");
+            
         }
 
 
