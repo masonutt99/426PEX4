@@ -25,6 +25,8 @@ namespace CS426.analysis
 
         int ifCounter = 0;
 
+        int whileCounter = 0;
+
         // Create a method to write something to the output stream
         private void Write(String textToWrite)
         {
@@ -119,21 +121,26 @@ namespace CS426.analysis
         public override void OutAGreaterexpExpression4(AGreaterexpExpression4 node)
         {
             var = ">";
+            WriteLine("\tcgt");
+
         }
 
         public override void OutALessexpExpression4(ALessexpExpression4 node)
         {
             var = "<";
+            WriteLine("\tclt");
         }
 
         public override void OutAEqualexpExpression3(AEqualexpExpression3 node)
         {
             var = "==";
+            WriteLine("\tceq");
         }
 
         public override void OutAGreaterequalexpExpression3(AGreaterequalexpExpression3 node)
         {
             var = ">=";
+            
         }
 
         public override void OutALessequalexpExpression3(ALessequalexpExpression3 node)
@@ -144,6 +151,8 @@ namespace CS426.analysis
         public override void OutANotequalexpExpression3(ANotequalexpExpression3 node)
         {
             var = "!=";
+
+
         }
 
         public override void OutAAssignStatement(AAssignStatement node)
@@ -180,7 +189,22 @@ namespace CS426.analysis
             WriteLine("\tneg");
         }
 
-       
+        public override void OutAAndexpExpression2(AAndexpExpression2 node)
+        {
+            WriteLine("\tand");
+        }
+
+        public override void OutAOrexpExpression(AOrexpExpression node)
+        {
+            WriteLine("\tor");
+        }
+
+        public override void OutANotexpExpression7(ANotexpExpression7 node)
+        {
+            //WriteLine("\tldc.i4 1");
+            WriteLine("\tnot");
+        }
+
 
         public override void OutAFunctionCallStatement(AFunctionCallStatement node)
         {
@@ -255,14 +279,20 @@ namespace CS426.analysis
             
             if (var == ">")
             {
-                WriteLine("\tbgt LABEL_TRUE" + ifCounter);
-                
+                //WriteLine("\t LABEL_TRUE" + ifCounter);
+                WriteLine("\tldc.i4 1");
+                WriteLine("\tbeq LABEL_TRUE" + ifCounter);
+
             }
             else if(var == "<") {
-                WriteLine("\tblt LABEL_TRUE" + ifCounter);
+                //WriteLine("\tblt LABEL_TRUE" + ifCounter);
+                WriteLine("\tldc.i4 1");
+                WriteLine("\tbeq LABEL_TRUE" + ifCounter);
             }
             else if(var == "==")
             {
+                //WriteLine("\tbeq LABEL_TRUE" + ifCounter);
+                WriteLine("\tldc.i4 1");
                 WriteLine("\tbeq LABEL_TRUE" + ifCounter);
             }
             else if(var == ">=")
@@ -349,17 +379,24 @@ namespace CS426.analysis
             // If it is 1, we're going to put a 1 on the stack, else a 0
             if (var == ">")
             {
-                WriteLine("\tbgt LABEL_TRUE" + ifCounter);
+                //WriteLine("\t LABEL_TRUE" + ifCounter);
+                WriteLine("\tldc.i4 1");
+                WriteLine("\tbeq LABEL_TRUE" + ifCounter);
 
             }
             else if (var == "<")
             {
-                WriteLine("\tblt LABEL_TRUE" + ifCounter);
+                //WriteLine("\tblt LABEL_TRUE" + ifCounter);
+                WriteLine("\tldc.i4 1");
+                WriteLine("\tbeq LABEL_TRUE" + ifCounter);
             }
             else if (var == "==")
             {
+                //WriteLine("\tbeq LABEL_TRUE" + ifCounter);
+                WriteLine("\tldc.i4 1");
                 WriteLine("\tbeq LABEL_TRUE" + ifCounter);
             }
+        
             else if (var == ">=")
             {
                 WriteLine("\tbge LABEL_TRUE" + ifCounter);
@@ -444,6 +481,91 @@ namespace CS426.analysis
             //WriteLine("\tcall void [mscorlib]System.Console::Write(int32)");
 
         }
+
+        //public override void CaseAWhileStatement(AWhileStatement node)
+        //{
+        //    InAWhileStatement(node);
+
+        //    if (node.GetWhile() != null)
+        //    {
+        //        node.GetWhile().Apply(this);
+        //    }
+        //    if (node.GetLeftParenthesis() != null)
+        //    {
+        //        node.GetLeftParenthesis().Apply(this);
+        //    }
+        //    if (node.GetExpression() != null)
+        //    {
+        //        node.GetExpression().Apply(this);
+        //    }
+
+        //    if (var == ">")
+        //    {
+        //        whileCounter += 1;
+        //        //WriteLine("\t LABEL_TRUE" + ifCounter);
+        //        WriteLine("\tldc.i4 1");
+        //        WriteLine("\tbeq LABEL_TRUEw" + whileCounter);
+
+        //    }
+        //    else if (var == "<")
+        //    {
+        //        whileCounter += 1;
+        //        //WriteLine("\tblt LABEL_TRUE" + ifCounter);
+        //        WriteLine("\tldc.i4 1");
+        //        WriteLine("\tbeq LABEL_TRUEw" + whileCounter);
+        //    }
+        //    else if (var == "==")
+        //    {
+        //        whileCounter += 1;
+        //        //WriteLine("\tbeq LABEL_TRUE" + ifCounter);
+        //        WriteLine("\tldc.i4 1");
+        //        WriteLine("\tbeq LABEL_TRUEw" + whileCounter);
+        //    }
+        //    WriteLine("\t\tldc.i4 0");
+        //    WriteLine("\tbr LABEL_CONTINUEw" + whileCounter);
+        //    WriteLine("\tLABEL_TRUEw" + whileCounter + ":");
+        //    WriteLine("\t\tldc.i4 1");
+        //    WriteLine("\tLABEL_CONTINUEw" + whileCounter + ":");
+
+        //    if (node.GetRightParenthesis() != null)
+        //    {
+        //        node.GetRightParenthesis().Apply(this);
+        //    }
+        //    if (node.GetLeftCurly() != null)
+        //    {
+        //        node.GetLeftCurly().Apply(this);
+        //    }
+        //    if (node.GetStatements() != null)
+        //    {
+        //        node.GetStatements().Apply(this);
+        //    }
+
+        //    if (var == ">")
+        //    {
+        //        whileCounter += 1;
+        //        //WriteLine("\t LABEL_TRUE" + ifCounter);
+        //        WriteLine("\tldc.i4 1");
+        //        WriteLine("\tbeq LABEL_TRUEw" + whileCounter);
+
+        //    }
+        //    else if (var == "<")
+        //    {
+        //        whileCounter += 1;
+        //        //WriteLine("\tblt LABEL_TRUE" + ifCounter);
+        //        WriteLine("\tldc.i4 1");
+        //        WriteLine("\tbeq LABEL_TRUEw" + whileCounter);
+        //    }
+        //    else if (var == "==")
+        //    {
+        //        whileCounter += 1;
+        //        //WriteLine("\tbeq LABEL_TRUE" + ifCounter);
+        //        WriteLine("\tldc.i4 1");
+        //        WriteLine("\tbeq LABEL_TRUEw" + whileCounter);
+        //    }
+
+
+
+        //}
     }
 }
     

@@ -5,4 +5,13 @@
 		printLine();
 	}
 
+	if (2 < 1 || 1 < 2) {
+      print("Or works");
+	  printLine();
+    }
+
+	if (!(2 < 1)) {
+      print("Not works");
+    }
+
 }
