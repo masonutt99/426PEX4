@@ -10,17 +10,21 @@
     f2 = 3.4e5;
 
     string s;
-    s = "helloworld";
+    s = "hello world";
 
     print("i =");
     printInt(i);
+    printLine();
 
     print("f1 =");
     printFloat(f1);
+    printLine();
 
     print("f2 =");
     printFloat(f2);
+    printLine();
 
     print("s =");
     printString(s);
+    printLine();
     }

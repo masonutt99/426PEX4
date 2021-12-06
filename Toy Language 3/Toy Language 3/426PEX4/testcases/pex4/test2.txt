@@ -2,16 +2,19 @@
 	int x;
     x = 0;
     float y;
-    f1 = 1.2;
+    y = 1.2;
     string s;
     s = "original string";
 
     print("x (before) =");
     printInt(x);
+    printLine();
     print("y (before) =");
     printFloat(y);
+    printLine();
     print("s (before) = ");
     printString(s);
+    printLine();
 
     x = 12345;
     y = -6.789;
@@ -19,9 +22,12 @@
 
     print("x (after) =");
     printInt(x);
+    printLine();
     print("y (after) =");
     printFloat(y);
+    printLine();
     print("s (after) = ");
     printString(s);
+    printLine();
 
     }

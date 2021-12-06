@@ -33,6 +33,7 @@ public interface Analysis : Switch
     void CaseAFunctionCallStatementStatement(AFunctionCallStatementStatement node);
     void CaseADeclareStatement(ADeclareStatement node);
     void CaseAAssignStatement(AAssignStatement node);
+    void CaseAElsee(AElsee node);
     void CaseAIfStatement(AIfStatement node);
     void CaseAWhileStatement(AWhileStatement node);
     void CaseAFunctionCallStatement(AFunctionCallStatement node);
@@ -42,6 +43,8 @@ public interface Analysis : Switch
     void CaseAPassExpression2(APassExpression2 node);
     void CaseAEqualexpExpression3(AEqualexpExpression3 node);
     void CaseANotequalexpExpression3(ANotequalexpExpression3 node);
+    void CaseAGreaterequalexpExpression3(AGreaterequalexpExpression3 node);
+    void CaseALessequalexpExpression3(ALessequalexpExpression3 node);
     void CaseAPassExpression3(APassExpression3 node);
     void CaseALessexpExpression4(ALessexpExpression4 node);
     void CaseAGreaterexpExpression4(AGreaterexpExpression4 node);
@@ -94,6 +97,8 @@ public interface Analysis : Switch
     void CaseTNotEquivalent(TNotEquivalent node);
     void CaseTLessThan(TLessThan node);
     void CaseTGreaterThan(TGreaterThan node);
+    void CaseTGreaterequal(TGreaterequal node);
+    void CaseTLessequal(TLessequal node);
     void CaseTWhile(TWhile node);
     void CaseTIf(TIf node);
     void CaseTElse(TElse node);
@@ -241,6 +246,10 @@ public class AnalysisAdapter : Analysis
     {
         DefaultCase(node);
     }
+    public virtual void CaseAElsee(AElsee node)
+    {
+        DefaultCase(node);
+    }
     public virtual void CaseAIfStatement(AIfStatement node)
     {
         DefaultCase(node);
@@ -274,6 +283,14 @@ public class AnalysisAdapter : Analysis
         DefaultCase(node);
     }
     public virtual void CaseANotequalexpExpression3(ANotequalexpExpression3 node)
+    {
+        DefaultCase(node);
+    }
+    public virtual void CaseAGreaterequalexpExpression3(AGreaterequalexpExpression3 node)
+    {
+        DefaultCase(node);
+    }
+    public virtual void CaseALessequalexpExpression3(ALessequalexpExpression3 node)
     {
         DefaultCase(node);
     }
@@ -479,6 +496,14 @@ public class AnalysisAdapter : Analysis
         DefaultCase(node);
     }
     public virtual void CaseTGreaterThan(TGreaterThan node)
+    {
+        DefaultCase(node);
+    }
+    public virtual void CaseTGreaterequal(TGreaterequal node)
+    {
+        DefaultCase(node);
+    }
+    public virtual void CaseTLessequal(TLessequal node)
     {
         DefaultCase(node);
     }
@@ -984,6 +1009,37 @@ public class DepthFirstAdapter : AnalysisAdapter
         }
         OutAAssignStatement(node);
     }
+    public virtual void InAElsee(AElsee node)
+    {
+        DefaultIn(node);
+    }
+
+    public virtual void OutAElsee(AElsee node)
+    {
+        DefaultOut(node);
+    }
+
+    public override void CaseAElsee(AElsee node)
+    {
+        InAElsee(node);
+        if(node.GetElse() != null)
+        {
+            node.GetElse().Apply(this);
+        }
+        if(node.GetLeftCurly() != null)
+        {
+            node.GetLeftCurly().Apply(this);
+        }
+        if(node.GetStatements() != null)
+        {
+            node.GetStatements().Apply(this);
+        }
+        if(node.GetRightCurly() != null)
+        {
+            node.GetRightCurly().Apply(this);
+        }
+        OutAElsee(node);
+    }
     public virtual void InAIfStatement(AIfStatement node)
     {
         DefaultIn(node);
@@ -1024,6 +1080,10 @@ public class DepthFirstAdapter : AnalysisAdapter
         if(node.GetRightCurly() != null)
         {
             node.GetRightCurly().Apply(this);
+        }
+        if(node.GetElsee() != null)
+        {
+            node.GetElsee().Apply(this);
         }
         OutAIfStatement(node);
     }
@@ -1250,6 +1310,60 @@ public class DepthFirstAdapter : AnalysisAdapter
             node.GetExpression4().Apply(this);
         }
         OutANotequalexpExpression3(node);
+    }
+    public virtual void InAGreaterequalexpExpression3(AGreaterequalexpExpression3 node)
+    {
+        DefaultIn(node);
+    }
+
+    public virtual void OutAGreaterequalexpExpression3(AGreaterequalexpExpression3 node)
+    {
+        DefaultOut(node);
+    }
+
+    public override void CaseAGreaterequalexpExpression3(AGreaterequalexpExpression3 node)
+    {
+        InAGreaterequalexpExpression3(node);
+        if(node.GetExpression3() != null)
+        {
+            node.GetExpression3().Apply(this);
+        }
+        if(node.GetGreaterequal() != null)
+        {
+            node.GetGreaterequal().Apply(this);
+        }
+        if(node.GetExpression4() != null)
+        {
+            node.GetExpression4().Apply(this);
+        }
+        OutAGreaterequalexpExpression3(node);
+    }
+    public virtual void InALessequalexpExpression3(ALessequalexpExpression3 node)
+    {
+        DefaultIn(node);
+    }
+
+    public virtual void OutALessequalexpExpression3(ALessequalexpExpression3 node)
+    {
+        DefaultOut(node);
+    }
+
+    public override void CaseALessequalexpExpression3(ALessequalexpExpression3 node)
+    {
+        InALessequalexpExpression3(node);
+        if(node.GetExpression3() != null)
+        {
+            node.GetExpression3().Apply(this);
+        }
+        if(node.GetLessequal() != null)
+        {
+            node.GetLessequal().Apply(this);
+        }
+        if(node.GetExpression4() != null)
+        {
+            node.GetExpression4().Apply(this);
+        }
+        OutALessequalexpExpression3(node);
     }
     public virtual void InAPassExpression3(APassExpression3 node)
     {
@@ -2335,6 +2449,37 @@ public class ReversedDepthFirstAdapter : AnalysisAdapter
         }
         OutAAssignStatement(node);
     }
+    public virtual void InAElsee(AElsee node)
+    {
+        DefaultIn(node);
+    }
+
+    public virtual void OutAElsee(AElsee node)
+    {
+        DefaultOut(node);
+    }
+
+    public override void CaseAElsee(AElsee node)
+    {
+        InAElsee(node);
+        if(node.GetRightCurly() != null)
+        {
+            node.GetRightCurly().Apply(this);
+        }
+        if(node.GetStatements() != null)
+        {
+            node.GetStatements().Apply(this);
+        }
+        if(node.GetLeftCurly() != null)
+        {
+            node.GetLeftCurly().Apply(this);
+        }
+        if(node.GetElse() != null)
+        {
+            node.GetElse().Apply(this);
+        }
+        OutAElsee(node);
+    }
     public virtual void InAIfStatement(AIfStatement node)
     {
         DefaultIn(node);
@@ -2348,6 +2493,10 @@ public class ReversedDepthFirstAdapter : AnalysisAdapter
     public override void CaseAIfStatement(AIfStatement node)
     {
         InAIfStatement(node);
+        if(node.GetElsee() != null)
+        {
+            node.GetElsee().Apply(this);
+        }
         if(node.GetRightCurly() != null)
         {
             node.GetRightCurly().Apply(this);
@@ -2601,6 +2750,60 @@ public class ReversedDepthFirstAdapter : AnalysisAdapter
             node.GetExpression3().Apply(this);
         }
         OutANotequalexpExpression3(node);
+    }
+    public virtual void InAGreaterequalexpExpression3(AGreaterequalexpExpression3 node)
+    {
+        DefaultIn(node);
+    }
+
+    public virtual void OutAGreaterequalexpExpression3(AGreaterequalexpExpression3 node)
+    {
+        DefaultOut(node);
+    }
+
+    public override void CaseAGreaterequalexpExpression3(AGreaterequalexpExpression3 node)
+    {
+        InAGreaterequalexpExpression3(node);
+        if(node.GetExpression4() != null)
+        {
+            node.GetExpression4().Apply(this);
+        }
+        if(node.GetGreaterequal() != null)
+        {
+            node.GetGreaterequal().Apply(this);
+        }
+        if(node.GetExpression3() != null)
+        {
+            node.GetExpression3().Apply(this);
+        }
+        OutAGreaterequalexpExpression3(node);
+    }
+    public virtual void InALessequalexpExpression3(ALessequalexpExpression3 node)
+    {
+        DefaultIn(node);
+    }
+
+    public virtual void OutALessequalexpExpression3(ALessequalexpExpression3 node)
+    {
+        DefaultOut(node);
+    }
+
+    public override void CaseALessequalexpExpression3(ALessequalexpExpression3 node)
+    {
+        InALessequalexpExpression3(node);
+        if(node.GetExpression4() != null)
+        {
+            node.GetExpression4().Apply(this);
+        }
+        if(node.GetLessequal() != null)
+        {
+            node.GetLessequal().Apply(this);
+        }
+        if(node.GetExpression3() != null)
+        {
+            node.GetExpression3().Apply(this);
+        }
+        OutALessequalexpExpression3(node);
     }
     public virtual void InAPassExpression3(APassExpression3 node)
     {

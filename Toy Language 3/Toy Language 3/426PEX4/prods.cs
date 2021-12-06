@@ -48,6 +48,10 @@ public abstract class PAssignStatement : Node
 {
 }
 
+public abstract class PElsee : Node
+{
+}
+
 public abstract class PIfStatement : Node
 {
 }
@@ -2332,6 +2336,201 @@ public sealed class AAssignStatement : PAssignStatement
     }
 
 }
+public sealed class AElsee : PElsee
+{
+    private TElse _else_;
+    private TLeftCurly _left_curly_;
+    private PStatements _statements_;
+    private TRightCurly _right_curly_;
+
+    public AElsee ()
+    {
+    }
+
+    public AElsee (
+            TElse _else_,
+            TLeftCurly _left_curly_,
+            PStatements _statements_,
+            TRightCurly _right_curly_
+    )
+    {
+        SetElse (_else_);
+        SetLeftCurly (_left_curly_);
+        SetStatements (_statements_);
+        SetRightCurly (_right_curly_);
+    }
+
+    public override Object Clone()
+    {
+        return new AElsee (
+            (TElse)CloneNode (_else_),
+            (TLeftCurly)CloneNode (_left_curly_),
+            (PStatements)CloneNode (_statements_),
+            (TRightCurly)CloneNode (_right_curly_)
+        );
+    }
+
+    public override void Apply(Switch sw)
+    {
+        ((Analysis) sw).CaseAElsee(this);
+    }
+
+    public TElse GetElse ()
+    {
+        return _else_;
+    }
+
+    public void SetElse (TElse node)
+    {
+        if(_else_ != null)
+        {
+            _else_.Parent(null);
+        }
+
+        if(node != null)
+        {
+            if(node.Parent() != null)
+            {
+                node.Parent().RemoveChild(node);
+            }
+
+            node.Parent(this);
+        }
+
+        _else_ = node;
+    }
+    public TLeftCurly GetLeftCurly ()
+    {
+        return _left_curly_;
+    }
+
+    public void SetLeftCurly (TLeftCurly node)
+    {
+        if(_left_curly_ != null)
+        {
+            _left_curly_.Parent(null);
+        }
+
+        if(node != null)
+        {
+            if(node.Parent() != null)
+            {
+                node.Parent().RemoveChild(node);
+            }
+
+            node.Parent(this);
+        }
+
+        _left_curly_ = node;
+    }
+    public PStatements GetStatements ()
+    {
+        return _statements_;
+    }
+
+    public void SetStatements (PStatements node)
+    {
+        if(_statements_ != null)
+        {
+            _statements_.Parent(null);
+        }
+
+        if(node != null)
+        {
+            if(node.Parent() != null)
+            {
+                node.Parent().RemoveChild(node);
+            }
+
+            node.Parent(this);
+        }
+
+        _statements_ = node;
+    }
+    public TRightCurly GetRightCurly ()
+    {
+        return _right_curly_;
+    }
+
+    public void SetRightCurly (TRightCurly node)
+    {
+        if(_right_curly_ != null)
+        {
+            _right_curly_.Parent(null);
+        }
+
+        if(node != null)
+        {
+            if(node.Parent() != null)
+            {
+                node.Parent().RemoveChild(node);
+            }
+
+            node.Parent(this);
+        }
+
+        _right_curly_ = node;
+    }
+
+    public override string ToString()
+    {
+        return ""
+            + ToString (_else_)
+            + ToString (_left_curly_)
+            + ToString (_statements_)
+            + ToString (_right_curly_)
+        ;
+    }
+
+    internal override void RemoveChild(Node child)
+    {
+        if ( _else_ == child )
+        {
+            _else_ = null;
+            return;
+        }
+        if ( _left_curly_ == child )
+        {
+            _left_curly_ = null;
+            return;
+        }
+        if ( _statements_ == child )
+        {
+            _statements_ = null;
+            return;
+        }
+        if ( _right_curly_ == child )
+        {
+            _right_curly_ = null;
+            return;
+        }
+    }
+
+    internal override void ReplaceChild(Node oldChild, Node newChild)
+    {
+        if ( _else_ == oldChild )
+        {
+            SetElse ((TElse) newChild);
+            return;
+        }
+        if ( _left_curly_ == oldChild )
+        {
+            SetLeftCurly ((TLeftCurly) newChild);
+            return;
+        }
+        if ( _statements_ == oldChild )
+        {
+            SetStatements ((PStatements) newChild);
+            return;
+        }
+        if ( _right_curly_ == oldChild )
+        {
+            SetRightCurly ((TRightCurly) newChild);
+            return;
+        }
+    }
+
+}
 public sealed class AIfStatement : PIfStatement
 {
     private TIf _if_;
@@ -2341,6 +2540,7 @@ public sealed class AIfStatement : PIfStatement
     private TLeftCurly _left_curly_;
     private PStatements _statements_;
     private TRightCurly _right_curly_;
+    private PElsee _elsee_;
 
     public AIfStatement ()
     {
@@ -2353,7 +2553,8 @@ public sealed class AIfStatement : PIfStatement
             TRightParenthesis _right_parenthesis_,
             TLeftCurly _left_curly_,
             PStatements _statements_,
-            TRightCurly _right_curly_
+            TRightCurly _right_curly_,
+            PElsee _elsee_
     )
     {
         SetIf (_if_);
@@ -2363,6 +2564,7 @@ public sealed class AIfStatement : PIfStatement
         SetLeftCurly (_left_curly_);
         SetStatements (_statements_);
         SetRightCurly (_right_curly_);
+        SetElsee (_elsee_);
     }
 
     public override Object Clone()
@@ -2374,7 +2576,8 @@ public sealed class AIfStatement : PIfStatement
             (TRightParenthesis)CloneNode (_right_parenthesis_),
             (TLeftCurly)CloneNode (_left_curly_),
             (PStatements)CloneNode (_statements_),
-            (TRightCurly)CloneNode (_right_curly_)
+            (TRightCurly)CloneNode (_right_curly_),
+            (PElsee)CloneNode (_elsee_)
         );
     }
 
@@ -2551,6 +2754,30 @@ public sealed class AIfStatement : PIfStatement
 
         _right_curly_ = node;
     }
+    public PElsee GetElsee ()
+    {
+        return _elsee_;
+    }
+
+    public void SetElsee (PElsee node)
+    {
+        if(_elsee_ != null)
+        {
+            _elsee_.Parent(null);
+        }
+
+        if(node != null)
+        {
+            if(node.Parent() != null)
+            {
+                node.Parent().RemoveChild(node);
+            }
+
+            node.Parent(this);
+        }
+
+        _elsee_ = node;
+    }
 
     public override string ToString()
     {
@@ -2562,6 +2789,7 @@ public sealed class AIfStatement : PIfStatement
             + ToString (_left_curly_)
             + ToString (_statements_)
             + ToString (_right_curly_)
+            + ToString (_elsee_)
         ;
     }
 
@@ -2602,6 +2830,11 @@ public sealed class AIfStatement : PIfStatement
             _right_curly_ = null;
             return;
         }
+        if ( _elsee_ == child )
+        {
+            _elsee_ = null;
+            return;
+        }
     }
 
     internal override void ReplaceChild(Node oldChild, Node newChild)
@@ -2639,6 +2872,11 @@ public sealed class AIfStatement : PIfStatement
         if ( _right_curly_ == oldChild )
         {
             SetRightCurly ((TRightCurly) newChild);
+            return;
+        }
+        if ( _elsee_ == oldChild )
+        {
+            SetElsee ((PElsee) newChild);
             return;
         }
     }
@@ -3960,6 +4198,318 @@ public sealed class ANotequalexpExpression3 : PExpression3
         if ( _not_equivalent_ == oldChild )
         {
             SetNotEquivalent ((TNotEquivalent) newChild);
+            return;
+        }
+        if ( _expression4_ == oldChild )
+        {
+            SetExpression4 ((PExpression4) newChild);
+            return;
+        }
+    }
+
+}
+public sealed class AGreaterequalexpExpression3 : PExpression3
+{
+    private PExpression3 _expression3_;
+    private TGreaterequal _greaterequal_;
+    private PExpression4 _expression4_;
+
+    public AGreaterequalexpExpression3 ()
+    {
+    }
+
+    public AGreaterequalexpExpression3 (
+            PExpression3 _expression3_,
+            TGreaterequal _greaterequal_,
+            PExpression4 _expression4_
+    )
+    {
+        SetExpression3 (_expression3_);
+        SetGreaterequal (_greaterequal_);
+        SetExpression4 (_expression4_);
+    }
+
+    public override Object Clone()
+    {
+        return new AGreaterequalexpExpression3 (
+            (PExpression3)CloneNode (_expression3_),
+            (TGreaterequal)CloneNode (_greaterequal_),
+            (PExpression4)CloneNode (_expression4_)
+        );
+    }
+
+    public override void Apply(Switch sw)
+    {
+        ((Analysis) sw).CaseAGreaterequalexpExpression3(this);
+    }
+
+    public PExpression3 GetExpression3 ()
+    {
+        return _expression3_;
+    }
+
+    public void SetExpression3 (PExpression3 node)
+    {
+        if(_expression3_ != null)
+        {
+            _expression3_.Parent(null);
+        }
+
+        if(node != null)
+        {
+            if(node.Parent() != null)
+            {
+                node.Parent().RemoveChild(node);
+            }
+
+            node.Parent(this);
+        }
+
+        _expression3_ = node;
+    }
+    public TGreaterequal GetGreaterequal ()
+    {
+        return _greaterequal_;
+    }
+
+    public void SetGreaterequal (TGreaterequal node)
+    {
+        if(_greaterequal_ != null)
+        {
+            _greaterequal_.Parent(null);
+        }
+
+        if(node != null)
+        {
+            if(node.Parent() != null)
+            {
+                node.Parent().RemoveChild(node);
+            }
+
+            node.Parent(this);
+        }
+
+        _greaterequal_ = node;
+    }
+    public PExpression4 GetExpression4 ()
+    {
+        return _expression4_;
+    }
+
+    public void SetExpression4 (PExpression4 node)
+    {
+        if(_expression4_ != null)
+        {
+            _expression4_.Parent(null);
+        }
+
+        if(node != null)
+        {
+            if(node.Parent() != null)
+            {
+                node.Parent().RemoveChild(node);
+            }
+
+            node.Parent(this);
+        }
+
+        _expression4_ = node;
+    }
+
+    public override string ToString()
+    {
+        return ""
+            + ToString (_expression3_)
+            + ToString (_greaterequal_)
+            + ToString (_expression4_)
+        ;
+    }
+
+    internal override void RemoveChild(Node child)
+    {
+        if ( _expression3_ == child )
+        {
+            _expression3_ = null;
+            return;
+        }
+        if ( _greaterequal_ == child )
+        {
+            _greaterequal_ = null;
+            return;
+        }
+        if ( _expression4_ == child )
+        {
+            _expression4_ = null;
+            return;
+        }
+    }
+
+    internal override void ReplaceChild(Node oldChild, Node newChild)
+    {
+        if ( _expression3_ == oldChild )
+        {
+            SetExpression3 ((PExpression3) newChild);
+            return;
+        }
+        if ( _greaterequal_ == oldChild )
+        {
+            SetGreaterequal ((TGreaterequal) newChild);
+            return;
+        }
+        if ( _expression4_ == oldChild )
+        {
+            SetExpression4 ((PExpression4) newChild);
+            return;
+        }
+    }
+
+}
+public sealed class ALessequalexpExpression3 : PExpression3
+{
+    private PExpression3 _expression3_;
+    private TLessequal _lessequal_;
+    private PExpression4 _expression4_;
+
+    public ALessequalexpExpression3 ()
+    {
+    }
+
+    public ALessequalexpExpression3 (
+            PExpression3 _expression3_,
+            TLessequal _lessequal_,
+            PExpression4 _expression4_
+    )
+    {
+        SetExpression3 (_expression3_);
+        SetLessequal (_lessequal_);
+        SetExpression4 (_expression4_);
+    }
+
+    public override Object Clone()
+    {
+        return new ALessequalexpExpression3 (
+            (PExpression3)CloneNode (_expression3_),
+            (TLessequal)CloneNode (_lessequal_),
+            (PExpression4)CloneNode (_expression4_)
+        );
+    }
+
+    public override void Apply(Switch sw)
+    {
+        ((Analysis) sw).CaseALessequalexpExpression3(this);
+    }
+
+    public PExpression3 GetExpression3 ()
+    {
+        return _expression3_;
+    }
+
+    public void SetExpression3 (PExpression3 node)
+    {
+        if(_expression3_ != null)
+        {
+            _expression3_.Parent(null);
+        }
+
+        if(node != null)
+        {
+            if(node.Parent() != null)
+            {
+                node.Parent().RemoveChild(node);
+            }
+
+            node.Parent(this);
+        }
+
+        _expression3_ = node;
+    }
+    public TLessequal GetLessequal ()
+    {
+        return _lessequal_;
+    }
+
+    public void SetLessequal (TLessequal node)
+    {
+        if(_lessequal_ != null)
+        {
+            _lessequal_.Parent(null);
+        }
+
+        if(node != null)
+        {
+            if(node.Parent() != null)
+            {
+                node.Parent().RemoveChild(node);
+            }
+
+            node.Parent(this);
+        }
+
+        _lessequal_ = node;
+    }
+    public PExpression4 GetExpression4 ()
+    {
+        return _expression4_;
+    }
+
+    public void SetExpression4 (PExpression4 node)
+    {
+        if(_expression4_ != null)
+        {
+            _expression4_.Parent(null);
+        }
+
+        if(node != null)
+        {
+            if(node.Parent() != null)
+            {
+                node.Parent().RemoveChild(node);
+            }
+
+            node.Parent(this);
+        }
+
+        _expression4_ = node;
+    }
+
+    public override string ToString()
+    {
+        return ""
+            + ToString (_expression3_)
+            + ToString (_lessequal_)
+            + ToString (_expression4_)
+        ;
+    }
+
+    internal override void RemoveChild(Node child)
+    {
+        if ( _expression3_ == child )
+        {
+            _expression3_ = null;
+            return;
+        }
+        if ( _lessequal_ == child )
+        {
+            _lessequal_ = null;
+            return;
+        }
+        if ( _expression4_ == child )
+        {
+            _expression4_ = null;
+            return;
+        }
+    }
+
+    internal override void ReplaceChild(Node oldChild, Node newChild)
+    {
+        if ( _expression3_ == oldChild )
+        {
+            SetExpression3 ((PExpression3) newChild);
+            return;
+        }
+        if ( _lessequal_ == oldChild )
+        {
+            SetLessequal ((TLessequal) newChild);
             return;
         }
         if ( _expression4_ == oldChild )

@@ -7,16 +7,21 @@ using System.Text;
 
 namespace CS426.analysis
 {
+    
     class CodeGenerator : DepthFirstAdapter
     {
         // Set up the output StreamWriter
         private StreamWriter _output;
+
+        private string var;
 
         // Create the Code Generator
         public CodeGenerator()
         {
             _output = new StreamWriter("program.il");
         }
+
+        int ifCounter = 0;
 
         // Create a method to write something to the output stream
         private void Write(String textToWrite)
@@ -109,6 +114,36 @@ namespace CS426.analysis
             WriteLine("\tldloc " + node.GetId().Text);
         }
 
+        public override void OutAGreaterexpExpression4(AGreaterexpExpression4 node)
+        {
+            var = ">";
+        }
+
+        public override void OutALessexpExpression4(ALessexpExpression4 node)
+        {
+            var = "<";
+        }
+
+        public override void OutAEqualexpExpression3(AEqualexpExpression3 node)
+        {
+            var = "==";
+        }
+
+        public override void OutAGreaterequalexpExpression3(AGreaterequalexpExpression3 node)
+        {
+            var = ">=";
+        }
+
+        public override void OutALessequalexpExpression3(ALessequalexpExpression3 node)
+        {
+            var = "<=";
+        }
+
+        public override void OutANotequalexpExpression3(ANotequalexpExpression3 node)
+        {
+            var = "!=";
+        }
+
         public override void OutAAssignStatement(AAssignStatement node)
         {
             // TO DO < PUT VALUE ON TOP OF STACK >
@@ -123,9 +158,19 @@ namespace CS426.analysis
             WriteLine("\tadd");
         }
 
+        public override void OutASubtractexpExpression5(ASubtractexpExpression5 node)
+        {
+            WriteLine("\tsub");
+        }
+
         public override void OutAMultexpExpression6(AMultexpExpression6 node)
         {
             WriteLine("\tmul");
+        }
+
+        public override void OutADivexpExpression6(ADivexpExpression6 node)
+        {
+            WriteLine("\tdiv");
         }
 
         public override void OutANegateexpExpression7(ANegateexpExpression7 node)
@@ -133,13 +178,15 @@ namespace CS426.analysis
             WriteLine("\tneg");
         }
 
+       
+
         public override void OutAFunctionCallStatement(AFunctionCallStatement node)
         {
             if (node.GetId().Text == "printInt")
             {
                 WriteLine("\tcall void [mscorlib]System.Console::Write(int32)");
             }
-            if (node.GetId().Text == "printFloat")
+            else if (node.GetId().Text == "printFloat")
             {
                 WriteLine("\tcall void [mscorlib]System.Console::Write(float32)");
             }
@@ -184,6 +231,8 @@ namespace CS426.analysis
         {
             InAIfStatement(node);
 
+            ifCounter += 1;
+
             if (node.GetIf() != null)
             {
                 node.GetIf().Apply(this);
@@ -199,13 +248,40 @@ namespace CS426.analysis
 
             // We are going compare whatever is on the stack to a 1
             // If it is 1, we're going to put a 1 on the stack, else a 0
-            WriteLine("\tldc.i4 1");
-            WriteLine("\tbeq LABEL_TRUE");
+            if (var == ">")
+            {
+                WriteLine("\tbgt LABEL_TRUE" + ifCounter);
+                
+            }
+            else if(var == "<") {
+                WriteLine("\tblt LABEL_TRUE" + ifCounter);
+            }
+            else if(var == "==")
+            {
+                WriteLine("\tbeq LABEL_TRUE" + ifCounter);
+            }
+            else if(var == ">=")
+            {
+                WriteLine("\tbge LABEL_TRUE" + ifCounter);
+            }
+            else if(var == "<=")
+            {
+                WriteLine("\tble LABEL_TRUE" + ifCounter);
+            }
+            else if(var == "!=")
+            {
+                WriteLine("\tbne.un LABEL_TRUE" + ifCounter);
+            }
+            else
+            {
+                WriteLine("\tldc.i4 1");
+                WriteLine("\tbeq LABEL_TRUE" + ifCounter);
+            }
             WriteLine("\t\tldc.i4 0");
-            WriteLine("\tbr LABEL_CONTINUE");
-            WriteLine("\tLABEL_TRUE:");
+            WriteLine("\tbr LABEL_CONTINUE" + ifCounter);
+            WriteLine("\tLABEL_TRUE" + ifCounter + ":");
             WriteLine("\t\tldc.i4 1");
-            WriteLine("\tLABEL_CONTINUE:");
+            WriteLine("\tLABEL_CONTINUE" + ifCounter +":");
 
             if (node.GetRightParenthesis() != null)
             {
@@ -221,9 +297,9 @@ namespace CS426.analysis
             //        and it will not work for more than
             //        a single IF throughout the program
             WriteLine("\n\t// IF TRUE CODE GOES HERE");
-            WriteLine("\tbrtrue LABEL_1");
-            WriteLine("\tbr LABEL_2");
-            WriteLine("\tLABEL_1:");
+            WriteLine("\tbrtrue LABEL_1" + ifCounter);
+            WriteLine("\tbr LABEL_2" + ifCounter);
+            WriteLine("\tLABEL_1" + ifCounter +":");
 
             if (node.GetStatements() != null)
             {
@@ -234,9 +310,25 @@ namespace CS426.analysis
                 node.GetRightCurly().Apply(this);
             }
 
-            WriteLine("\tLABEL_2:");
+            WriteLine("\tbr LABEL_3" + ifCounter);
 
-            OutAIfStatement(node);
+            WriteLine("\tLABEL_2" + ifCounter + ":");
+
+            if (node.GetStatements() != null)
+            {
+                //node.GetStatements().Apply(this);
+            }
+            if (node.GetRightCurly() != null)
+            {
+                node.GetRightCurly().Apply(this);
+            }
+            
+
+
+            WriteLine("\tLABEL_3" + ifCounter + ":");
+            //WriteLine("\tcall void [mscorlib]System.Console::Write(int32)");
+            //WriteLine("\tcall void [mscorlib]System.Console::Write(int32)");
+            
         }
     }
 }

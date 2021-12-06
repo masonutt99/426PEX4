@@ -559,6 +559,56 @@ public sealed class TGreaterThan : Token
     }
 }
 
+public sealed class TGreaterequal : Token
+{
+    public TGreaterequal(string text)
+    {
+        Text = text;
+    }
+
+    public TGreaterequal(string text, int line, int pos)
+    {
+        Text = text;
+        Line = line;
+        Pos = pos;
+    }
+
+    public override Object Clone()
+    {
+      return new TGreaterequal(Text, Line, Pos);
+    }
+
+    public override void Apply(Switch sw)
+    {
+        ((Analysis) sw).CaseTGreaterequal(this);
+    }
+}
+
+public sealed class TLessequal : Token
+{
+    public TLessequal(string text)
+    {
+        Text = text;
+    }
+
+    public TLessequal(string text, int line, int pos)
+    {
+        Text = text;
+        Line = line;
+        Pos = pos;
+    }
+
+    public override Object Clone()
+    {
+      return new TLessequal(Text, Line, Pos);
+    }
+
+    public override void Apply(Switch sw)
+    {
+        ((Analysis) sw).CaseTLessequal(this);
+    }
+}
+
 public sealed class TWhile : Token
 {
     public TWhile(string text)

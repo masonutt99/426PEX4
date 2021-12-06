@@ -6,7 +6,7 @@
     <OutputType>Exe</OutputType>
     <NoStandardLibraries>false</NoStandardLibraries>
     <AssemblyName>ConsoleApplication</AssemblyName>
-    <TargetFrameworkVersion>v4.8</TargetFrameworkVersion>
+    <TargetFrameworkVersion>v4.6.1</TargetFrameworkVersion>
     <TargetFrameworkProfile>
     </TargetFrameworkProfile>
     <FileAlignment>512</FileAlignment>
@@ -64,6 +64,10 @@
     <Content Include="testcases\pex3\test1.txt" />
     <Content Include="testcases\pex4\test.txt" />
     <Content Include="testcases\pex4\test2.txt" />
+    <Content Include="testcases\pex4\test3.txt" />
+    <Content Include="testcases\pex4\test4.txt" />
+    <Content Include="testcases\pex4\test5.txt" />
+    <Content Include="testcases\pex4\test6.txt" />
   </ItemGroup>
   <ItemGroup>
     <None Include="app.config" />

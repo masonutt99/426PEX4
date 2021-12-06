@@ -1,0 +1,22 @@
+﻿main{
+
+int x;
+x = 3 + 4 - 5;
+x = x * 2 / 2;
+x = (x * x) * ( 5 - 5 );
+
+
+print("x = ");
+printInt(x);
+printLine();
+
+float y;
+y = 10.44 + 9.78 - 10.11;
+y = y * (2.0 / 1.0);
+
+print("y = ");
+printFloat(y);
+printLine();
+
+
+}

@@ -20,7 +20,7 @@ Tokens
 	// Literals
 	int = '0' | natural whole*;
 	string = '"' (anything_but_quotes_or_backslash* | ('\"')*)* '"';
-	float = ('0' | natural*)'.'whole*('e'?'-'?)natural*;
+	float = ('0' | natural* | whole+)'.'whole*('e'?'-'?)natural*;
 
 	// Comments
 	comment_line = '//' ([[0 .. 0xffff] - [10 + 13]])*;
@@ -44,6 +44,8 @@ Tokens
 	not_equivalent = '!=';
 	less_than = '<';
 	greater_than = '>';
+	greaterequal = '>=';
+	lessequal = '<=';
 
 	// Keywords
 	while = 'while';
@@ -100,14 +102,19 @@ Productions
 	// ===================
 	declare_statement = [type]:id [varname]:id eol;
 	assign_statement = id assign expression eol;
-	if_statement = if left_parenthesis expression right_parenthesis left_curly statements right_curly;
+	
+	elsee = else left_curly statements right_curly;
+	if_statement = if left_parenthesis expression right_parenthesis left_curly statements right_curly elsee?; 
+
+
+
 	while_statement = while left_parenthesis expression right_parenthesis left_curly statements right_curly;
 	function_call_statement = id left_parenthesis parameters right_parenthesis eol;
 
 	// EXPRESSIONS
 	expression = {orexp} expression or expression2 | {pass} expression2;
 	expression2 = {andexp} expression2 and expression3 | {pass} expression3;
-	expression3 = {equalexp} expression3 equivalent expression4 | {notequalexp} expression3 not_equivalent expression4 | {pass} expression4;
+	expression3 = {equalexp} expression3 equivalent expression4 | {notequalexp} expression3 not_equivalent expression4 | {greaterequalexp} expression3 greaterequal expression4 | {lessequalexp} expression3 lessequal expression4 | {pass} expression4;
 	expression4 = {lessexp} expression4 less_than expression5 | {greaterexp} expression4 greater_than expression5 | {pass} expression5;
 
 	expression5 = {addexp} expression5 plus expression6 | {subtractexp} expression5 minus expression6 | {pass} expression6;

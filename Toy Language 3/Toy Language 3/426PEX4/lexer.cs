@@ -530,6 +530,28 @@ public class Lexer
                             line = accept_line;
                             return token;
                         }
+                    case 31:
+                        {
+                            Token token = New31(
+                                GetText(accept_length),
+                                start_line + 1,
+                                start_pos + 1);
+                            PushBack(accept_length);
+                            pos = accept_pos;
+                            line = accept_line;
+                            return token;
+                        }
+                    case 32:
+                        {
+                            Token token = New32(
+                                GetText(accept_length),
+                                start_line + 1,
+                                start_pos + 1);
+                            PushBack(accept_length);
+                            pos = accept_pos;
+                            line = accept_line;
+                            return token;
+                        }
                     }
                 }
                 else
@@ -574,15 +596,17 @@ public class Lexer
     private Token New19(String text, int line, int pos) { return new TNotEquivalent(text, line, pos); }
     private Token New20(String text, int line, int pos) { return new TLessThan(text, line, pos); }
     private Token New21(String text, int line, int pos) { return new TGreaterThan(text, line, pos); }
-    private Token New22(String text, int line, int pos) { return new TWhile(text, line, pos); }
-    private Token New23(String text, int line, int pos) { return new TIf(text, line, pos); }
-    private Token New24(String text, int line, int pos) { return new TElse(text, line, pos); }
-    private Token New25(String text, int line, int pos) { return new TConst(text, line, pos); }
-    private Token New26(String text, int line, int pos) { return new TDelimiter(text, line, pos); }
-    private Token New27(String text, int line, int pos) { return new TDef(text, line, pos); }
-    private Token New28(String text, int line, int pos) { return new TMain(text, line, pos); }
-    private Token New29(String text, int line, int pos) { return new TId(text, line, pos); }
-    private Token New30(String text, int line, int pos) { return new TBlank(text, line, pos); }
+    private Token New22(String text, int line, int pos) { return new TGreaterequal(text, line, pos); }
+    private Token New23(String text, int line, int pos) { return new TLessequal(text, line, pos); }
+    private Token New24(String text, int line, int pos) { return new TWhile(text, line, pos); }
+    private Token New25(String text, int line, int pos) { return new TIf(text, line, pos); }
+    private Token New26(String text, int line, int pos) { return new TElse(text, line, pos); }
+    private Token New27(String text, int line, int pos) { return new TConst(text, line, pos); }
+    private Token New28(String text, int line, int pos) { return new TDelimiter(text, line, pos); }
+    private Token New29(String text, int line, int pos) { return new TDef(text, line, pos); }
+    private Token New30(String text, int line, int pos) { return new TMain(text, line, pos); }
+    private Token New31(String text, int line, int pos) { return new TId(text, line, pos); }
+    private Token New32(String text, int line, int pos) { return new TBlank(text, line, pos); }
 
     private int GetChar()
     {
@@ -730,67 +754,70 @@ public class Lexer
         new int[][] {
           new int[] {46, 46, 14},
           new int[] {48, 57, 43},
-          new int[] {65, 90, 43},
-          new int[] {95, 95, 44},
-          new int[] {97, 122, 43},
+          new int[] {65, 90, 44},
+          new int[] {95, 95, 45},
+          new int[] {97, 122, 44},
         },
         new int[][] {
           new int[] {46, 46, 14},
-          new int[] {48, 48, 45},
-          new int[] {49, 57, 46},
+          new int[] {48, 48, 46},
+          new int[] {49, 57, 47},
           new int[] {65, 122, -18},
         },
         new int[][] {
         },
         new int[][] {
+          new int[] {61, 61, 48},
         },
         new int[][] {
-          new int[] {61, 61, 47},
+          new int[] {61, 61, 49},
+        },
+        new int[][] {
+          new int[] {61, 61, 50},
+        },
+        new int[][] {
+          new int[] {48, 57, 44},
+          new int[] {65, 122, -18},
+        },
+        new int[][] {
+          new int[] {48, 95, -24},
+          new int[] {97, 110, 44},
+          new int[] {111, 111, 51},
+          new int[] {112, 122, 44},
+        },
+        new int[][] {
+          new int[] {48, 95, -24},
+          new int[] {97, 100, 44},
+          new int[] {101, 101, 52},
+          new int[] {102, 122, 44},
+        },
+        new int[][] {
+          new int[] {48, 95, -24},
+          new int[] {97, 107, 44},
+          new int[] {108, 108, 53},
+          new int[] {109, 122, 44},
+        },
+        new int[][] {
+          new int[] {48, 95, -24},
+          new int[] {97, 101, 44},
+          new int[] {102, 102, 54},
+          new int[] {103, 122, 44},
+        },
+        new int[][] {
+          new int[] {48, 95, -24},
+          new int[] {97, 97, 55},
+          new int[] {98, 122, 44},
+        },
+        new int[][] {
+          new int[] {48, 95, -24},
+          new int[] {97, 103, 44},
+          new int[] {104, 104, 56},
+          new int[] {105, 122, 44},
         },
         new int[][] {
         },
         new int[][] {
-          new int[] {48, 122, -18},
-        },
-        new int[][] {
-          new int[] {48, 95, -18},
-          new int[] {97, 110, 43},
-          new int[] {111, 111, 48},
-          new int[] {112, 122, 43},
-        },
-        new int[][] {
-          new int[] {48, 95, -18},
-          new int[] {97, 100, 43},
-          new int[] {101, 101, 49},
-          new int[] {102, 122, 43},
-        },
-        new int[][] {
-          new int[] {48, 95, -18},
-          new int[] {97, 107, 43},
-          new int[] {108, 108, 50},
-          new int[] {109, 122, 43},
-        },
-        new int[][] {
-          new int[] {48, 95, -18},
-          new int[] {97, 101, 43},
-          new int[] {102, 102, 51},
-          new int[] {103, 122, 43},
-        },
-        new int[][] {
-          new int[] {48, 95, -18},
-          new int[] {97, 97, 52},
-          new int[] {98, 122, 43},
-        },
-        new int[][] {
-          new int[] {48, 95, -18},
-          new int[] {97, 103, 43},
-          new int[] {104, 104, 53},
-          new int[] {105, 122, 43},
-        },
-        new int[][] {
-        },
-        new int[][] {
-          new int[] {124, 124, 54},
+          new int[] {124, 124, 57},
         },
         new int[][] {
         },
@@ -802,12 +829,12 @@ public class Lexer
         new int[][] {
         },
         new int[][] {
-          new int[] {34, 34, 55},
+          new int[] {34, 34, 58},
         },
         new int[][] {
         },
         new int[][] {
-          new int[] {49, 57, 56},
+          new int[] {49, 57, 59},
         },
         new int[][] {
           new int[] {45, 101, -16},
@@ -817,28 +844,32 @@ public class Lexer
         },
         new int[][] {
           new int[] {45, 45, 37},
-          new int[] {49, 57, 56},
+          new int[] {49, 57, 59},
         },
         new int[][] {
-          new int[] {0, 41, 57},
-          new int[] {42, 42, 58},
-          new int[] {43, 65535, 57},
+          new int[] {0, 41, 60},
+          new int[] {42, 42, 61},
+          new int[] {43, 65535, 60},
         },
         new int[][] {
-          new int[] {0, 9, 59},
-          new int[] {11, 12, 59},
-          new int[] {14, 65535, 59},
+          new int[] {0, 9, 62},
+          new int[] {11, 12, 62},
+          new int[] {14, 65535, 62},
         },
         new int[][] {
-          new int[] {48, 122, -18},
+          new int[] {46, 122, -18},
         },
         new int[][] {
-          new int[] {48, 57, 60},
-          new int[] {65, 90, 60},
-          new int[] {97, 122, 60},
+          new int[] {48, 122, -24},
         },
         new int[][] {
-          new int[] {48, 57, 45},
+          new int[] {48, 57, 63},
+          new int[] {65, 90, 63},
+          new int[] {97, 122, 63},
+        },
+        new int[][] {
+          new int[] {46, 46, 14},
+          new int[] {48, 57, 46},
           new int[] {65, 122, -18},
         },
         new int[][] {
@@ -847,35 +878,39 @@ public class Lexer
         new int[][] {
         },
         new int[][] {
-          new int[] {48, 95, -18},
-          new int[] {97, 109, 43},
-          new int[] {110, 110, 61},
-          new int[] {111, 122, 43},
+        },
+        new int[][] {
+        },
+        new int[][] {
+          new int[] {48, 95, -24},
+          new int[] {97, 109, 44},
+          new int[] {110, 110, 64},
+          new int[] {111, 122, 44},
         },
         new int[][] {
           new int[] {48, 101, -28},
-          new int[] {102, 102, 62},
-          new int[] {103, 122, 43},
+          new int[] {102, 102, 65},
+          new int[] {103, 122, 44},
         },
         new int[][] {
-          new int[] {48, 95, -18},
-          new int[] {97, 114, 43},
-          new int[] {115, 115, 63},
-          new int[] {116, 122, 43},
+          new int[] {48, 95, -24},
+          new int[] {97, 114, 44},
+          new int[] {115, 115, 66},
+          new int[] {116, 122, 44},
         },
         new int[][] {
-          new int[] {48, 122, -18},
+          new int[] {48, 122, -24},
         },
         new int[][] {
-          new int[] {48, 95, -18},
-          new int[] {97, 104, 43},
-          new int[] {105, 105, 64},
-          new int[] {106, 122, 43},
+          new int[] {48, 95, -24},
+          new int[] {97, 104, 44},
+          new int[] {105, 105, 67},
+          new int[] {106, 122, 44},
         },
         new int[][] {
-          new int[] {48, 104, -54},
-          new int[] {105, 105, 65},
-          new int[] {106, 122, 43},
+          new int[] {48, 104, -57},
+          new int[] {105, 105, 68},
+          new int[] {106, 122, 44},
         },
         new int[][] {
         },
@@ -883,84 +918,84 @@ public class Lexer
           new int[] {0, 65535, -8},
         },
         new int[][] {
-          new int[] {49, 57, 56},
+          new int[] {49, 57, 59},
         },
         new int[][] {
           new int[] {0, 65535, -43},
         },
         new int[][] {
           new int[] {0, 42, -43},
-          new int[] {43, 46, 57},
-          new int[] {47, 47, 66},
-          new int[] {48, 65535, 57},
+          new int[] {43, 46, 60},
+          new int[] {47, 47, 69},
+          new int[] {48, 65535, 60},
         },
         new int[][] {
           new int[] {0, 65535, -44},
         },
         new int[][] {
-          new int[] {48, 90, -46},
-          new int[] {95, 95, 44},
-          new int[] {97, 122, 60},
+          new int[] {48, 90, -47},
+          new int[] {95, 95, 45},
+          new int[] {97, 122, 63},
         },
         new int[][] {
-          new int[] {48, 114, -52},
-          new int[] {115, 115, 67},
-          new int[] {116, 122, 43},
+          new int[] {48, 114, -55},
+          new int[] {115, 115, 70},
+          new int[] {116, 122, 44},
         },
         new int[][] {
-          new int[] {48, 122, -18},
+          new int[] {48, 122, -24},
         },
         new int[][] {
           new int[] {48, 100, -26},
-          new int[] {101, 101, 68},
-          new int[] {102, 122, 43},
+          new int[] {101, 101, 71},
+          new int[] {102, 122, 44},
         },
         new int[][] {
-          new int[] {48, 109, -50},
-          new int[] {110, 110, 69},
-          new int[] {111, 122, 43},
+          new int[] {48, 109, -53},
+          new int[] {110, 110, 72},
+          new int[] {111, 122, 44},
         },
         new int[][] {
           new int[] {48, 107, -27},
-          new int[] {108, 108, 70},
-          new int[] {109, 122, 43},
+          new int[] {108, 108, 73},
+          new int[] {109, 122, 44},
         },
         new int[][] {
           new int[] {0, 65535, -43},
         },
         new int[][] {
-          new int[] {48, 95, -18},
-          new int[] {97, 115, 43},
-          new int[] {116, 116, 71},
-          new int[] {117, 122, 43},
+          new int[] {48, 95, -24},
+          new int[] {97, 115, 44},
+          new int[] {116, 116, 74},
+          new int[] {117, 122, 44},
         },
         new int[][] {
-          new int[] {48, 122, -18},
+          new int[] {48, 122, -24},
         },
         new int[][] {
-          new int[] {48, 122, -18},
+          new int[] {48, 122, -24},
         },
         new int[][] {
           new int[] {48, 100, -26},
-          new int[] {101, 101, 72},
-          new int[] {102, 122, 43},
+          new int[] {101, 101, 75},
+          new int[] {102, 122, 44},
         },
         new int[][] {
-          new int[] {48, 122, -18},
+          new int[] {48, 122, -24},
         },
         new int[][] {
-          new int[] {48, 122, -18},
+          new int[] {48, 122, -24},
         },
       },
     };
 
     private static int[][] accept = {
       new int[] {
-        -1, 30, 30, 30, 30, 17, -1, -1, 13, 14, 8, 7, 26, 9, 2, 10, 
-        0, 0, 5, 20, 6, 21, 29, 29, 29, 29, 29, 29, 29, 11, -1, 12, 
-        19, -1, 1, -1, 15, 2, 2, 2, 2, -1, 3, 29, -1, 0, 0, 18, 
-        29, 29, 29, 23, 29, 29, 16, -1, 2, -1, -1, 3, 29, 29, 27, 29, 
-        29, 29, 4, 29, 24, 28, 29, 25, 22, 
+        -1, 32, 32, 32, 32, 17, -1, -1, 13, 14, 8, 7, 28, 9, 2, 10, 
+        0, 0, 5, 20, 6, 21, 31, 31, 31, 31, 31, 31, 31, 11, -1, 12, 
+        19, -1, 1, -1, 15, 2, 2, 2, 2, -1, 3, 31, 31, -1, 0, 0, 
+        23, 18, 22, 31, 31, 31, 25, 31, 31, 16, -1, 2, -1, -1, 3, 31, 
+        31, 29, 31, 31, 31, 4, 31, 26, 30, 31, 27, 24, 
       },
     };
 
