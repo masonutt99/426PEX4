@@ -532,6 +532,22 @@ namespace CS426.analysis
                 WriteLine("\tbeq LABEL_TRUEw" + whileCounter);
                 WriteLine("\tbr LABEL_FALSE" + whileCounter);
             }
+            else if (var == ">=")
+            {
+                WriteLine("\tbge LABEL_TRUEw" + whileCounter);
+                WriteLine("\tbr LABEL_FALSE" + whileCounter);
+            }
+            else if (var == "<=")
+            {
+                WriteLine("\tble LABEL_TRUEw" + whileCounter);
+                WriteLine("\tbr LABEL_FALSE" + whileCounter);
+            }
+            else if (var == "!=")
+            {
+                WriteLine("\tbne.un LABEL_TRUEw" + whileCounter);
+                WriteLine("\tbr LABEL_FALSE" + whileCounter);
+            }
+
             //WriteLine("\t\tldc.i4 0");
             //WriteLine("\tbr LABEL_CONTINUEw" + whileCounter);
             WriteLine("\tLABEL_TRUEw" + whileCounter + ":");

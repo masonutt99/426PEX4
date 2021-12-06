@@ -4,8 +4,8 @@
     x= 0;
     int y;
     y = 0;
-    while (y < 3) {
-      while (x < 3) {
+    while (y <= 3) {
+      while (x <= 3) {
         print("  ");
         printInt(x);
         print(", ");

@@ -2,6 +2,6 @@
 <Project ToolsVersion="Current" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Debug|x86'">
     <StartWorkingDirectory>C:\Users\C22Mason.Utt\OneDrive - afacademy.af.edu\comp426\pex4\426PEX4\Toy Language 3\Toy Language 3\426PEX4\</StartWorkingDirectory>
-    <StartArguments>testcases/pex4/test5.txt</StartArguments>
+    <StartArguments>testcases/pex4/test8.txt</StartArguments>
   </PropertyGroup>
 </Project>
