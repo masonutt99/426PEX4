@@ -552,14 +552,26 @@ namespace CS426.analysis
             {
                 node.GetRightCurly().Apply(this);
             }
-            WriteLine("\tbr LABEL_START" + whileCounter);
 
             if (j >= 2)
             {
-                WriteLine("\tLABEL_FALSE" + (whileCounter - 1) + ":");
+                WriteLine("\tbr LABEL_START" + (whileCounter));
+
+                WriteLine("\tLABEL_FALSE" + (whileCounter) + ":");
                 j -= 1;
             }
-            else WriteLine("\tLABEL_FALSE" + whileCounter + ":");
+            else if (whileCounter == 1)
+            {
+                WriteLine("\tbr LABEL_START1");
+                WriteLine("\tLABEL_FALSE1:");
+            }
+            else
+            {
+                
+                WriteLine("\tbr LABEL_START" + (whileCounter - 1));
+                WriteLine("\tLABEL_FALSE" + (whileCounter - 1 ) + ":");
+                
+            }
 
             
 

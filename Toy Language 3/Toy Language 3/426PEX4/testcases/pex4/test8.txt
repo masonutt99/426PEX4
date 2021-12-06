@@ -12,7 +12,7 @@
         printInt(y);
         printLine();
         x = x + 1;
-      }
+        }
       x = 0;
       y = y + 1;
     }
