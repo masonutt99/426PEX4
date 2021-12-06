@@ -14,6 +14,7 @@ namespace CS426.analysis
         private StreamWriter _output;
 
         private string var;
+        private int j = 0;
 
 
 
@@ -126,6 +127,7 @@ namespace CS426.analysis
         }
 
         public override void OutALessexpExpression4(ALessexpExpression4 node)
+
         {
             var = "<";
             WriteLine("\tclt");
@@ -482,90 +484,87 @@ namespace CS426.analysis
 
         }
 
-        //public override void CaseAWhileStatement(AWhileStatement node)
-        //{
-        //    InAWhileStatement(node);
+        public override void CaseAWhileStatement(AWhileStatement node)
+        {
+            
+            InAWhileStatement(node);
+            whileCounter += 1;
+            j += 1;
 
-        //    if (node.GetWhile() != null)
-        //    {
-        //        node.GetWhile().Apply(this);
-        //    }
-        //    if (node.GetLeftParenthesis() != null)
-        //    {
-        //        node.GetLeftParenthesis().Apply(this);
-        //    }
-        //    if (node.GetExpression() != null)
-        //    {
-        //        node.GetExpression().Apply(this);
-        //    }
+            WriteLine("\tLABEL_START" + whileCounter + ":");
 
-        //    if (var == ">")
-        //    {
-        //        whileCounter += 1;
-        //        //WriteLine("\t LABEL_TRUE" + ifCounter);
-        //        WriteLine("\tldc.i4 1");
-        //        WriteLine("\tbeq LABEL_TRUEw" + whileCounter);
+            if (node.GetWhile() != null)
+            {
+                node.GetWhile().Apply(this);
+            }
+            if (node.GetLeftParenthesis() != null)
+            {
+                node.GetLeftParenthesis().Apply(this);
+            }
+            if (node.GetExpression() != null)
+            {
+                node.GetExpression().Apply(this);
+            }
 
-        //    }
-        //    else if (var == "<")
-        //    {
-        //        whileCounter += 1;
-        //        //WriteLine("\tblt LABEL_TRUE" + ifCounter);
-        //        WriteLine("\tldc.i4 1");
-        //        WriteLine("\tbeq LABEL_TRUEw" + whileCounter);
-        //    }
-        //    else if (var == "==")
-        //    {
-        //        whileCounter += 1;
-        //        //WriteLine("\tbeq LABEL_TRUE" + ifCounter);
-        //        WriteLine("\tldc.i4 1");
-        //        WriteLine("\tbeq LABEL_TRUEw" + whileCounter);
-        //    }
-        //    WriteLine("\t\tldc.i4 0");
-        //    WriteLine("\tbr LABEL_CONTINUEw" + whileCounter);
-        //    WriteLine("\tLABEL_TRUEw" + whileCounter + ":");
-        //    WriteLine("\t\tldc.i4 1");
-        //    WriteLine("\tLABEL_CONTINUEw" + whileCounter + ":");
+            
+            if (var == ">")
+            {
+                //whileCounter += 1;
+                //WriteLine("\t LABEL_TRUE" + ifCounter);
+                WriteLine("\tldc.i4 1");
+                WriteLine("\tbeq LABEL_TRUEw" + whileCounter);
+                WriteLine("\tbr LABEL_FALSE" + whileCounter);
+            }
+            else if (var == "<")
+            {
+                //whileCounter += 1;
+                //WriteLine("\tblt LABEL_TRUE" + ifCounter);
+                WriteLine("\tldc.i4 1");
+                WriteLine("\tbeq LABEL_TRUEw" + whileCounter);
+                WriteLine("\tbr LABEL_FALSE" + whileCounter);
+            }
+            else if (var == "==")
+            {
+                //whileCounter += 1;
+                //WriteLine("\tbeq LABEL_TRUE" + ifCounter);
+                WriteLine("\tldc.i4 1");
+                WriteLine("\tbeq LABEL_TRUEw" + whileCounter);
+                WriteLine("\tbr LABEL_FALSE" + whileCounter);
+            }
+            //WriteLine("\t\tldc.i4 0");
+            //WriteLine("\tbr LABEL_CONTINUEw" + whileCounter);
+            WriteLine("\tLABEL_TRUEw" + whileCounter + ":");
+            //WriteLine("\t\tldc.i4 1");
+            //WriteLine("\tLABEL_CONTINUEw" + whileCounter + ":");
+            if (node.GetRightParenthesis() != null)
+            {
+                node.GetRightParenthesis().Apply(this);
+            }
+            if (node.GetLeftCurly() != null)
+            {
+                node.GetLeftCurly().Apply(this);
+            }
+            if (node.GetStatements() != null)
+            {
+                node.GetStatements().Apply(this);
+            }
+            if (node.GetRightCurly() != null)
+            {
+                node.GetRightCurly().Apply(this);
+            }
+            WriteLine("\tbr LABEL_START" + whileCounter);
 
-        //    if (node.GetRightParenthesis() != null)
-        //    {
-        //        node.GetRightParenthesis().Apply(this);
-        //    }
-        //    if (node.GetLeftCurly() != null)
-        //    {
-        //        node.GetLeftCurly().Apply(this);
-        //    }
-        //    if (node.GetStatements() != null)
-        //    {
-        //        node.GetStatements().Apply(this);
-        //    }
+            if (j >= 2)
+            {
+                WriteLine("\tLABEL_FALSE" + (whileCounter - 1) + ":");
+                j -= 1;
+            }
+            else WriteLine("\tLABEL_FALSE" + whileCounter + ":");
 
-        //    if (var == ">")
-        //    {
-        //        whileCounter += 1;
-        //        //WriteLine("\t LABEL_TRUE" + ifCounter);
-        //        WriteLine("\tldc.i4 1");
-        //        WriteLine("\tbeq LABEL_TRUEw" + whileCounter);
-
-        //    }
-        //    else if (var == "<")
-        //    {
-        //        whileCounter += 1;
-        //        //WriteLine("\tblt LABEL_TRUE" + ifCounter);
-        //        WriteLine("\tldc.i4 1");
-        //        WriteLine("\tbeq LABEL_TRUEw" + whileCounter);
-        //    }
-        //    else if (var == "==")
-        //    {
-        //        whileCounter += 1;
-        //        //WriteLine("\tbeq LABEL_TRUE" + ifCounter);
-        //        WriteLine("\tldc.i4 1");
-        //        WriteLine("\tbeq LABEL_TRUEw" + whileCounter);
-        //    }
+            
 
 
-
-        //}
+        }
     }
 }
     

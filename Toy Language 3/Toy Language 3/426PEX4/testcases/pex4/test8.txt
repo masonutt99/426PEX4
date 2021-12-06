@@ -1,0 +1,22 @@
+﻿main{
+
+    int x;
+    x= 0;
+    int y;
+    y = 0;
+    while (y < 3) {
+      while (x < 3) {
+        print("  ");
+        printInt(x);
+        print(", ");
+        printInt(y);
+        printLine();
+        x = x + 1;
+      }
+      x = 0;
+      y = y + 1;
+    }
+    print("  Loop Complete");
+    printLine();
+
+}
